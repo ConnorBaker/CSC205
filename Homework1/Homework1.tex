@@ -1,0 +1,209 @@
+% Author: Connor Baker
+% Date Created: January 12, 2016
+% Last Edited: January 12, 2016
+% Version: 0.1a
+
+\documentclass[12pt]{article}
+
+% Import Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{gensymb}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage[left=1.5in,right=1.5in,top=1.5in,bottom=1.5in]{geometry}
+
+\begin{document}
+% Create the Header
+\begin{center}
+\subsection*{CSC 205: Homework 1\\Connor Baker, January 2017}
+\end{center}
+Instructions:  Solve all problems below, showing ALL work (calculations).  Simply writing an answer will result in ZERO credit for the problem.  You are encouraged to practice on your own to be certain you can properly calculate the number base conversions and math correctly before attempting these problems.\\
+
+% Problem 1
+\begin{enumerate}
+\item Convert $1282_{10}$ to binary.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}] Start by picking an arbitrarily large power of two (not to exceed 1/2 the number we are to convert). I'll pick $2^7$, which is 128.
+  \item[] Divide 1282 by 128. This yields 10R2 (a quotient of ten with a remainder of two). Since for the choice of divisor I picked $2^7$, the binary representation that I'll be appending later won't just be two in base two (because two was our remainder): it'll be two in base two with seven place values (the number of place values must match the power of the base we choose to make our divisor).
+  \item[] Divide 10 by 128. This yields 0R10. Again, since for the choice of divisor I picked $2^7$, the binary representation that I'll be appending  will be ten in base two with seven place values.
+  \item[] Just like the standard algorithm for change of base, we take the last remainder in the new base and it becomes the leftmost part of the new representation. As such, we'll concatenate $10_10$ and $2_10$ after converting to get our binary representation of $1282_{10}$.
+  \item[] $10_{10}$ to seven place values in base two is $0001010_2$. Likewise, $2_{10}$ to seven place values in base two is $0000010_2$. The concatenation is $00010100000010_2$. Leading zeros hold no value, so this is equivalent to $10100000010_2$.
+  \item[\textbf{Check}] The number $10100000010_2$ can be written as $1\times2^{10}+1\times2^8+1\times2^1$, which is $1282_{10}$.
+\end{enumerate}
+
+% Problem 2
+\begin{enumerate}
+\item[2.] Convert $359_{10}$ to octal.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}] Start by picking an arbitrarily large power of eight (not to exceed 1/2 the number we are to convert). I'll pick $8^2$, which is 64.
+  \item[] Divide 359 by 64. This yields 5R39. Since for the choice of divisor I picked $8^2$, the octal representation that I'll be appending later won't just be 39 in base eight: it'll be 39 in base eight with two place values (the number of place values must match the power of the base we choose to make our divisor).
+  \item[] It should be noted that one pitfall of this method is that although it cuts the number of computations needed for larger numbers by using higher powers of the base, it also draws on one's ability to recognize smaller numbers in that base. For example, by choosing $8^2$ as the divisor instead of $8^1$, we do roughly half as many calculations. However, we now how to find $39_{10}$ in octal with two place values, where as if we had chosen $8^1$, the remainder would certainly have been under eight (and which makes sense, not least of all because we would be forced to write the remainder with one place value, since the number of place values must match the power of the base).
+  \item[] Divide 5 by 64. This yields 0R5. Again, since for the choice of divisor I picked $8^2$, the octal representation that I'll be appending will be five in base eight with two place values.
+  \item[] $5_{10}$ to two place values in octal is $05_8$. Likewise, $39_{10}$ to two place values in octal is $47_8$. The concatenation is $0547_8$. Again, leading zeros hold no value, so this is equivalent to $547_8$.
+  \item[\textbf{Check}] The number $547_8$ can be written as $5\times8^{2}+4\times8^1+7\times8^0$, which is $359_{10}$.
+\end{enumerate}
+
+% Problem 3
+\begin{enumerate}
+\item[3.] Convert $8191_{10}$ to hexadecimal.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}] Start by picking an arbitrarily large power of eight (not to exceed 1/2 the number we are to convert). I'll pick $16^2$, which is 256.
+  \item[] Divide 8191 by 256
+\end{enumerate}
+
+% Problem 4
+\begin{enumerate}
+\item[4.] Convert 2E0C$_{16}$ to decimal.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+% Problem 5
+\begin{enumerate}
+\item[5.] Convert $561_8$ to decimal.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 6
+\begin{enumerate}
+\item[6.] Convert $1110110_2$ to decimal.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 7
+\begin{enumerate}
+\item[7.] Convert 67EA$_{16}$ to binary DIRECTLY (no intermediate base).
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 8
+\begin{enumerate}
+\item[8.] Convert $6204_8$ from octal to binary DIRECTLY (no intermediate base).
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 9
+\begin{enumerate}
+\item[9.] Convert $111011001100111110101_2$ to hexadecimal DIRECTLY (no intermediate base).
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 10
+\begin{enumerate}
+\item[10.] Convert $100110111101_2$ to octal DIRECTLY (no intermediate base).
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 11
+\begin{enumerate}
+\item[11.] Represent $-160$ in three notations: sign magnitude, 1’s complement, and 2’s complement.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+\noindent Perform the following arithmetic using signed BINARY numbers and the 2’s complement representation.
+% Problem 12
+\begin{enumerate}
+\item[12.] $27+19$
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 13
+\begin{enumerate}
+\item[13.] $72-85$
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 14
+\begin{enumerate}
+\item[14.] $31-11$
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+\noindent Answer the following questions regarding BINARY numbers.
+% Problem 15
+\begin{enumerate}
+\item[15.] What is the LARGEST positive unsigned value that can be represented using 12 bits?
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+
+% Problem 16
+\begin{enumerate}
+\item[16.] Using 16-bit 2’s complement signed numbers, what is the largest POSITIVE magnitude that can be represented?  What is the smallest NEGATIVE magnitude (e.g. $-10$ is smaller than $-5$)?
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textbf{Work}]
+\end{enumerate}
+
+\end{document}
