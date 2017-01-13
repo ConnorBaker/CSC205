@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
 % Last Edited: January 13, 2016
-% Version: 0.1b
+% Version: 0.1c
 
 \documentclass[12pt]{article}
 
@@ -151,20 +151,24 @@
 
 % Problem 11
 \begin{enumerate}
-  \item[\textbf{Problem 11}] Represent $-160$ in three notations: sign magnitude, 1’s complement, and 2’s complement.
+  \item[\textbf{Problem 11}] Represent $-160_{10}$ in three notations: sign magnitude, 1’s complement, and 2’s complement.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
   \item[\textit{Work}] The binary representation of $160_{10}$ is $10100000_2$.
   \begin{enumerate}
-    \item[\textbf{Sign Magnitude}] The sign magnitude representation of $-160_{10}$ is $110100000_2$ (simply appending a one to the front in the place of the sign bit to indicate that the number is negative).
-    \item[\textbf{1's Complement}] The 1's complement of $-160_{10}$ is $101011111_2$ (flipping the bit-value of the original number and then appending a one to the front in the place of the sign bit to indicate that the number is negative).
-    \item[\textbf{2's Complement}] The sign magnitude representation of $-160_{10}$ is $110100000_2$.
+    \item[\textit{Sign Magnitude}] The sign magnitude representation of $-160_{10}$ is $110100000_2$ (simply appending a one to the front in the place of the sign bit to indicate that the number is negative).
+    \item[\textit{1's Complement}] The 1's complement of $-160_{10}$ is $101011111_2$ (flipping the bit-value of the original number and then appending a one to the front in the place of the sign bit to indicate that the number is negative).
+    \item[\textit{2's Complement}] The sign magnitude representation of $-160_{10}$ is $110100001_2$ (flipping the bit-value of the original number, appending a one to the front in the place of the sign bit to indicate that the number is negative, and then adding a one).
   \end{enumerate}
 \end{enumerate}
 
-\noindent Perform the following arithmetic using signed BINARY numbers and the 2’s complement representation.
+% Instructions
+\begin{enumerate}
+  \item[\textbf{Instructions}] Perform the following arithmetic operations on the decimals using signed BINARY numbers and the 2’s complement representation.
+\end{enumerate}
+
 % Problem 12
 \begin{enumerate}
   \item[\textbf{Problem 12}] $27+19$
@@ -172,7 +176,18 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
+  \item[\textit{Work}] Since both numbers are positive, their 2's complement is simply their binary representation with a zero to the left of the most significant bit. However, we should note that if we were to add 27 and 19 without providing additional padding, we would experience overflow (both are less than the next power of two, which would their sum would surpass). As such, we'll add an additional leading zero: $27_{10} = 0011011_2$ and $19_{10} = 0010011_2$.
+  \item[]
+  \begin{center}
+    \begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+      &   & 1 &   &   & 1 & 1 &   \\    \hline
+      & 0 & 0 & 1 & 1 & 0 & 1 & 1 \\
+    + & 0 & 0 & 1 & 0 & 0 & 1 & 1 \\    \hline
+      & 0 & 1 & 0 & 1 & 1 & 1 & 0
+    \end{tabular}
+  \end{center}
+  \item[] Therefore, our result in 2's complement is $0101110_2$.
+  \item[\textit{Check}] To check, simply convert back to base ten: $0101110_2 = 1\times2^5+1\times2^3+1\times2^2+1\times2^1=46_{10}$.
 \end{enumerate}
 
 
@@ -197,7 +212,11 @@
   \item[\textit{Work}]
 \end{enumerate}
 
-\noindent Answer the following questions regarding BINARY numbers.
+% Instructions
+\begin{enumerate}
+  \item[\textbf{Instructions}] Answer the following questions regarding BINARY numbers.
+\end{enumerate}
+
 % Problem 15
 \begin{enumerate}
   \item[\textbf{Problem 15}] What is the LARGEST positive unsigned value that can be represented using 12 bits?
@@ -205,7 +224,10 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
+  \item[\textit{Work}] Per the formula given in class:
+  \begin{enumerate}
+    \item[\textit{Theorem}] Given an a number $n$, the largest positive value that can be stored in the $n$-bit binary number can be obtained by $2^n-1$. So, given a 12-bit binary number, the largest positive unsigned value that can be represented is $2^{12}-1=4095_{10}$.
+  \end{enumerate}
 \end{enumerate}
 
 
@@ -216,7 +238,11 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
+  \item[\textit{Work}] Per the slide that was shown in class:
+  \begin{enumerate}
+    \item[\textit{Theorem}] Given an a number $n$, the range of values for an $n$-bit binary number as a 2's complement is $[-2^{n-1},(2^{n-1}-1)]$. As such, the largest positive value that can be stored is $2^{15}-1=32767_{10
+    }$. However, the largest negative value that can be stored is the negative of one more than the largest positive value, which would be $32768_{10}$.
+  \end{enumerate}
 \end{enumerate}
 
 \end{document}
