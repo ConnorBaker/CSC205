@@ -1,0 +1,154 @@
+% Author: Connor Baker
+% Date Created: January 12, 2016
+% Last Edited: January 12, 2016
+% Version: 0.1a
+
+\documentclass[12pt]{article}
+% Import Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{gensymb}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage[left=1.5in,right=1.5in,top=1.5in,bottom=1.5in]{geometry}
+
+\begin{document}
+% No page number on the title page
+\pagenumbering{gobble}
+
+% Creates a title page
+  \title{Quickly Converting Decimal to Binary}
+  \author{Connor Baker}
+  \date{January 2017\\Version 0.1a}
+\maketitle
+
+% Create the Abstract section
+\begin{center}
+\subsection*{Abstract}
+\end{center}
+This paper briefly discusses ways to convert decimal numbers to their binary representation using several fast algorithms that exploit powers of two.
+
+
+
+\newpage % New page
+
+
+
+% Create the table of contents formatted with dotted lines and roman page numbering
+\makeatletter
+\pagenumbering{roman}
+\makeatother
+\tableofcontents
+
+% End the table of contents and reset page numbering to arabic
+\clearpage
+\pagenumbering{arabic}
+
+
+
+\newpage % New page
+
+
+
+% Create the A Brief Explanation of the Problem} section
+\begin{center}
+\section{From Decimal to Binary}
+\end{center}
+Given a number $ABCDE$ in any base $\beta$, one can rewrite that number as the sum of each digit multiplied by the base to a power, like so: $A\times\beta^4 + B\times\beta^3 + C\times\beta^2 + D\times\beta^1 + E\times\beta^0$. This is called exponential form. As an example, given the number $44675_{10}$ (the notation means $44675$ in base ten), we can rewrite it as $4\times10^4 + 4\times10^3 + 6\times10^2 + 7\times10^1 + 5\times10^0$.
+
+\par In terms of changing the base of a number, the goal is to rewrite it as the sum of some numbers multiplied by the desired base to a power. Take for example the number $7_{10}$. We know that we can rewrite it as $7\times10^0$, but how could we express this number in base two? Our goal is to end up with something that looks like $a_1\times2^{n} + a_2\times2^{n-1} + ... + a_b\times2^0$. The question then becomes, how can we find those weights $\{a_1, a_2, ..., a_b\}$ that make the sum seven? The answer is division. \\
+
+\begin{center}
+\begin{tabular}{c|c|c}
+  \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Binary Representation} \\
+  7 & 0 & \\
+  3 & 1 & 1 \\
+  1 & 1 & 11 \\
+  0 & 1 & 111 \\
+  0 & 0 & 111
+\end{tabular}
+\end{center}
+
+\par In the table above, we perform the division necessary to calculate the binary representation of seven in base two. Each time we divide the decimal by two and get a remainder of one, we put a one in the rightmost place of our decimal representation. Likewise, if we have a remainder of zero, we append a zero. Once the value of the quotient is zero, we halt computation because we have found the binary representation in full.
+
+\par In the first row, we have the original decimal, a remainder of zero since we have not begun to divide yet, and an empty binary representation. The second row has the whole number portion of the quotient, the remainder, and the beginnings of our binary representation. The third and fourth rows continue filling out binary representation. The fifth row is where we meet the halt condition, which is why the binary representation is unchanged.
+
+\par So know that we know our binary representation is $111_2$, we can say that $7_{10} = 1\times2^2+1\times2^1+1\times2^0 = 111_2$.
+
+
+
+\newpage % New page
+
+
+
+% Create the A Brief Explanation of the Problem} section
+\begin{center}
+\section{Algorithms}
+\end{center}
+\subsection{A Simple Approach}
+This is the algorithm used in the previous section for converting
+\begin{center}
+\captionof{table}{x2 Algorithm}
+\begin{tabular}{c|c|c}
+    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
+    $(0,1)$   & '0' & $0\times2^0$ \\
+    $[1,2)$   & '1' & $1\times2^0$
+\end{tabular}
+\end{center}
+
+\subsection{Exploiting Powers of Two}
+
+\begin{center}
+\captionof{table}{x4 Algorithm}
+\begin{tabular}{c|c|c}
+    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
+    $(0,1)$   & '00' & $0\times2^1 + 0\times2^0$ \\
+    $[1,2)$   & '01' & $0\times2^1 + 1\times2^0$ \\
+    $[2,3)$   & '10' & $1\times2^1 + 0\times2^0$ \\
+    $[3,4)$   & '11' & $1\times2^1 + 1\times2^0$
+\end{tabular}
+\end{center}
+
+\begin{center}
+\captionof{table}{x8 Algorithm}
+\begin{tabular}{c|c|c}
+    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
+    $(0,1)$   & '000' & $0\times2^2 + 0\times2^1 + 0\times2^0$ \\
+    $[1,2)$   & '001' & $0\times2^2 + 0\times2^1 + 1\times2^0$ \\
+    $[2,3)$   & '010' & $0\times2^2 + 1\times2^1 + 0\times2^0$ \\
+    $[3,4)$   & '011' & $0\times2^2 + 1\times2^1 + 1\times2^0$ \\
+    $[4,5)$   & '100' & $1\times2^2 + 0\times2^1 + 0\times2^0$ \\
+    $[5,6)$   & '101' & $1\times2^2 + 0\times2^1 + 1\times2^0$ \\
+    $[6,7)$   & '110' & $1\times2^2 + 1\times2^1 + 0\times2^0$ \\
+    $[7,8)$   & '111' & $1\times2^2 + 1\times2^1 + 1\times2^0$
+\end{tabular}
+\end{center}
+
+\begin{center}
+  \captionof{table}{x16 Algorithm}
+\begin{tabular}{c|c|c}
+    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
+    $(0,1)$   & '0000' & $0\times2^3 + 0\times2^2 + 0\times2^1 + 0\times2^0$ \\
+    $[1,2)$   & '0001' & $0\times2^3 + 0\times2^2 + 0\times2^1 + 1\times2^0$ \\
+    $[2,3)$   & '0010' & $0\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0$ \\
+    $[3,4)$   & '0011' & $0\times2^3 + 0\times2^2 + 1\times2^1 + 1\times2^0$ \\
+    $[4,5)$   & '0100' & $0\times2^3 + 1\times2^2 + 0\times2^1 + 0\times2^0$ \\
+    $[5,6)$   & '0101' & $0\times2^3 + 1\times2^2 + 0\times2^1 + 1\times2^0$ \\
+    $[6,7)$   & '0110' & $0\times2^3 + 1\times2^2 + 1\times2^1 + 0\times2^0$ \\
+    $[7,8)$   & '0111' & $0\times2^3 + 1\times2^2 + 1\times2^1 + 1\times2^0$ \\
+    $[8,9)$   & '1000' & $1\times2^3 + 0\times2^2 + 0\times2^1 + 0\times2^0$ \\
+    $[9,10)$  & '1001' & $1\times2^3 + 0\times2^2 + 0\times2^1 + 1\times2^0$ \\
+    $[10,11)$ & '1010' & $1\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0$ \\
+    $[11,12)$ & '1011' & $1\times2^3 + 0\times2^2 + 1\times2^1 + 1\times2^0$ \\
+    $[12,13)$ & '1100' & $1\times2^3 + 1\times2^2 + 0\times2^1 + 0\times2^0$ \\
+    $[13,14)$ & '1101' & $1\times2^3 + 1\times2^2 + 0\times2^1 + 1\times2^0$ \\
+    $[14,15)$ & '1110' & $1\times2^3 + 1\times2^2 + 1\times2^1 + 0\times2^0$ \\
+    $[15,16)$ & '1111' & $1\times2^3 + 1\times2^2 + 1\times2^1 + 1\times2^0$
+\end{tabular}
+\end{center}
+
+\end{document}
