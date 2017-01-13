@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
-% Last Edited: January 12, 2016
-% Version: 0.1a
+% Last Edited: January 13, 2016
+% Version: 0.1b
 
 \documentclass[12pt]{article}
 
@@ -20,18 +20,20 @@
 \begin{document}
 % Create the Header
 \begin{center}
-\subsection*{CSC 205: Homework 1\\Connor Baker, January 2017}
+  \subsection*{CSC 205: Homework 1\\Connor Baker, January 2017}
 \end{center}
-Instructions:  Solve all problems below, showing ALL work (calculations).  Simply writing an answer will result in ZERO credit for the problem.  You are encouraged to practice on your own to be certain you can properly calculate the number base conversions and math correctly before attempting these problems.\\
+\begin{enumerate}
+  \item[\textbf{Instructions}] Solve all problems below, showing ALL work (calculations). Simply writing an answer will result in ZERO credit for the problem. You are encouraged to practice on your own to be certain you can properly calculate the number base conversions and math correctly before attempting these problems.
+\end{enumerate}
 
 % Problem 1
 \begin{enumerate}
-\item Convert $1282_{10}$ to binary.
+  \item[\textbf{Problem 1}] Convert $1282_{10}$ to binary.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}] Start by picking an arbitrarily large power of two (not to exceed 1/2 the number we are to convert). I'll pick $2^7$, which is 128.
+  \item[\textit{Work}] Start by picking an arbitrarily large power of two (not to exceed 1/2 the number we are to convert). I'll pick $2^7$, which is 128.
   \item[] Divide 1282 by 128. This yields 10R2 (a quotient of ten with a remainder of two). Since for the choice of divisor I picked $2^7$, the binary representation that I'll be appending later won't just be two in base two (because two was our remainder): it'll be two in base two with seven place values (the number of place values must match the power of the base we choose to make our divisor).
   \item[] Divide 10 by 128. This yields 0R10. Again, since for the choice of divisor I picked $2^7$, the binary representation that I'll be appending  will be ten in base two with seven place values.
   \item[] Just like the standard algorithm for change of base, we take the last remainder in the new base and it becomes the leftmost part of the new representation. As such, we'll concatenate $10_10$ and $2_10$ after converting to get our binary representation of $1282_{10}$.
@@ -41,12 +43,12 @@ Instructions:  Solve all problems below, showing ALL work (calculations).  Simpl
 
 % Problem 2
 \begin{enumerate}
-\item[2.] Convert $359_{10}$ to octal.
+  \item[\textbf{Problem 2}] Convert $359_{10}$ to octal.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}] Start by picking an arbitrarily large power of eight (not to exceed 1/2 the number we are to convert). I'll pick $8^2$, which is 64.
+  \item[\textit{Work}] Start by picking an arbitrarily large power of eight (not to exceed 1/2 the number we are to convert). I'll pick $8^2$, which is 64.
   \item[] Divide 359 by 64. This yields 5R39. Since for the choice of divisor I picked $8^2$, the octal representation that I'll be appending later won't just be 39 in base eight: it'll be 39 in base eight with two place values (the number of place values must match the power of the base we choose to make our divisor).
   \item[] It should be noted that one pitfall of this method is that although it cuts the number of computations needed for larger numbers by using higher powers of the base, it also draws on one's ability to recognize smaller numbers in that base. For example, by choosing $8^2$ as the divisor instead of $8^1$, we do roughly half as many calculations. However, we now how to find $39_{10}$ in octal with two place values, where as if we had chosen $8^1$, the remainder would certainly have been under eight (and which makes sense, not least of all because we would be forced to write the remainder with one place value, since the number of place values must match the power of the base).
   \item[] Divide 5 by 64. This yields 0R5. Again, since for the choice of divisor I picked $8^2$, the octal representation that I'll be appending will be five in base eight with two place values.
@@ -56,154 +58,165 @@ Instructions:  Solve all problems below, showing ALL work (calculations).  Simpl
 
 % Problem 3
 \begin{enumerate}
-\item[3.] Convert $8191_{10}$ to hexadecimal.
+  \item[\textbf{Problem 3}] Convert $8191_{10}$ to hexadecimal.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}] Start by picking an arbitrarily large power of eight (not to exceed 1/2 the number we are to convert). I'll pick $16^2$, which is 256.
-  \item[] Divide 8191 by 256
+  \item[\textit{Work}] Start by picking an arbitrarily large power of eight (not to exceed 1/2 the number we are to convert). I'll pick $16^2$, which is 256.
+  \item[] Divide 8191 by 256. This yields 31R255. Since for the choice of divisor I picked $16^2$, the hexadecimal representation that I'll be appending later won't just be 255 in hexadecimal: it'll be 255 in hexadecimal with two place values (the number of place values must match the power of the base we choose to make our divisor).
+  \item[] Divide 31 by 256. This yields 0R31. Again, since for the choice of divisor I picked $16^2$, the hexadecimal representation that I'll be appending will be 31 in hexadecimal with two place values.
+  \item[] $31_{10}$ to two place values in hexadecimal is 1F$_{16}$. Likewise, $255_{10}$ to two place values in hexadecimal is FF$_{16}$. The concatenation is 1FFF$_{16}$.
+  \item[\textbf{Check}] The number 1FFF$_{16}$ can be written as $1\times16^3+15\times16^2+15\times16^1+15\times16^0$, which is $8191_{10}$.
 \end{enumerate}
 
 % Problem 4
 \begin{enumerate}
-\item[4.] Convert 2E0C$_{16}$ to decimal.
+  \item[\textbf{Problem 4}] Convert 2E0C$_{16}$ to decimal.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] Writing this problem in exponential notation is a good start: 2E0C$_{16} = 2\times16^3+14\times16^2+12\times16^0 = 8192+3584+12=11788_{10}$.
 \end{enumerate}
 
 % Problem 5
 \begin{enumerate}
-\item[5.] Convert $561_8$ to decimal.
+  \item[\textbf{Problem 5}] Convert $561_8$ to decimal.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] Writing this problem in exponential notation is a good start: $561_8 = 5\times8^2+6\times8^1+1\times8^0 = 320+48+1=369_{10}$.
 \end{enumerate}
-
 
 % Problem 6
 \begin{enumerate}
-\item[6.] Convert $1110110_2$ to decimal.
+  \item[\textbf{Problem 6}] Convert $1110110_2$ to decimal.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] Writing this problem in exponential notation is a good start: $1110110_2 = 1\times2^6+1\times2^5+1\times2^4+1\times2^2+1\times2^1 = 64+32+16+4+2=118_{10}$.
 \end{enumerate}
 
 
 % Problem 7
 \begin{enumerate}
-\item[7.] Convert 67EA$_{16}$ to binary DIRECTLY (no intermediate base).
+  \item[\textbf{Problem 7}] Convert 67EA$_{16}$ to binary DIRECTLY (no intermediate base).
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] Writing this problem in exponential notation is a good start: 67EA$_{16} = 6\times16^3+7\times16^2+14\times16^1+10\times2^0 = 24576+1792+224+10=26602_{10}$.
 \end{enumerate}
 
 
 % Problem 8
 \begin{enumerate}
-\item[8.] Convert $6204_8$ from octal to binary DIRECTLY (no intermediate base).
+  \item[\textbf{Problem 8}] Convert $6204_8$ from octal to binary DIRECTLY (no intermediate base).
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] Writing this problem in exponential notation is a good start: $6204_8 = 6\times8^3+2\times8^2+4\times8^0 = 3072+128+4=3204_{10}$.
 \end{enumerate}
 
 
 % Problem 9
 \begin{enumerate}
-\item[9.] Convert $111011001100111110101_2$ to hexadecimal DIRECTLY (no intermediate base).
+  \item[\textbf{Problem 9}] Convert $111011001100111110101_2$ to hexadecimal DIRECTLY (no intermediate base).
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] It's easiest to do this by grouping the binary in chunks of four from right to left.
+  \item[] So we have $1_2$ $1101_2$ $1001_2$ $1001_2$ $1111_2$ $0101_2$. By evaluating each chunk separately, converting it to hexadecimal, and concatenating the results, we will effectively have converted the original binary to hexadecimal.
+  \item[] Before concatenation, we have $1_{16}$ D$_{16}$ 9$_{16}$ 9$_{16}$ F$_{16}$ 5$_{16}$. After concatenation, we find that the original number in hexadecimal is 1D99F5$_{16}$.
 \end{enumerate}
 
 
 % Problem 10
 \begin{enumerate}
-\item[10.] Convert $100110111101_2$ to octal DIRECTLY (no intermediate base).
+  \item[\textbf{Problem 10}] Convert $100110111101_2$ to octal DIRECTLY (no intermediate base).
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] It's easiest to do this by grouping the binary in chunks of three from right to left.
+  \item[] So we have $100_2$ $110_2$ $111_2$ $101_2$. By evaluating each chunk separately, converting it to octal, and concatenating the results, we will effectively have converted the original binary to octal.
+  \item[] Before concatenation, we have $4_8$ $6_8$ $7_8$ $5_8$. After concatenation, we find that the original number in octal is $4675_8$.
 \end{enumerate}
 
 
 % Problem 11
 \begin{enumerate}
-\item[11.] Represent $-160$ in three notations: sign magnitude, 1’s complement, and 2’s complement.
+  \item[\textbf{Problem 11}] Represent $-160$ in three notations: sign magnitude, 1’s complement, and 2’s complement.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}] The binary representation of $160_{10}$ is $10100000_2$.
+  \begin{enumerate}
+    \item[\textbf{Sign Magnitude}] The sign magnitude representation of $-160_{10}$ is $110100000_2$ (simply appending a one to the front in the place of the sign bit to indicate that the number is negative).
+    \item[\textbf{1's Complement}] The 1's complement of $-160_{10}$ is $101011111_2$ (flipping the bit-value of the original number and then appending a one to the front in the place of the sign bit to indicate that the number is negative).
+    \item[\textbf{2's Complement}] The sign magnitude representation of $-160_{10}$ is $110100000_2$.
+  \end{enumerate}
 \end{enumerate}
 
 \noindent Perform the following arithmetic using signed BINARY numbers and the 2’s complement representation.
 % Problem 12
 \begin{enumerate}
-\item[12.] $27+19$
+  \item[\textbf{Problem 12}] $27+19$
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}]
 \end{enumerate}
 
 
 % Problem 13
 \begin{enumerate}
-\item[13.] $72-85$
+  \item[\textbf{Problem 13}] $72-85$
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}]
 \end{enumerate}
 
 
 % Problem 14
 \begin{enumerate}
-\item[14.] $31-11$
+  \item[\textbf{Problem 14}] $31-11$
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}]
 \end{enumerate}
 
 \noindent Answer the following questions regarding BINARY numbers.
 % Problem 15
 \begin{enumerate}
-\item[15.] What is the LARGEST positive unsigned value that can be represented using 12 bits?
+  \item[\textbf{Problem 15}] What is the LARGEST positive unsigned value that can be represented using 12 bits?
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}]
 \end{enumerate}
 
 
 % Problem 16
 \begin{enumerate}
-\item[16.] Using 16-bit 2’s complement signed numbers, what is the largest POSITIVE magnitude that can be represented?  What is the smallest NEGATIVE magnitude (e.g. $-10$ is smaller than $-5$)?
+  \item[\textbf{Problem 16}] Using 16-bit 2’s complement signed numbers, what is the largest POSITIVE magnitude that can be represented?  What is the smallest NEGATIVE magnitude (e.g. $-10$ is smaller than $-5$)?
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textbf{Work}]
+  \item[\textit{Work}]
 \end{enumerate}
 
 \end{document}
