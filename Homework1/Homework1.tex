@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
 % Last Edited: January 13, 2016
-% Version: 0.1c
+% Version: 0.1d
 
 \documentclass[12pt]{article}
 
@@ -160,7 +160,7 @@
   \begin{enumerate}
     \item[\textit{Sign Magnitude}] The sign magnitude representation of $-160_{10}$ is $110100000_2$ (simply appending a one to the front in the place of the sign bit to indicate that the number is negative).
     \item[\textit{1's Complement}] The 1's complement of $-160_{10}$ is $101011111_2$ (flipping the bit-value of the original number and then appending a one to the front in the place of the sign bit to indicate that the number is negative).
-    \item[\textit{2's Complement}] The sign magnitude representation of $-160_{10}$ is $110100001_2$ (flipping the bit-value of the original number, appending a one to the front in the place of the sign bit to indicate that the number is negative, and then adding a one).
+    \item[\textit{2's Complement}] The 2's complement of $-160_{10}$ is $110100001_2$ (flipping the bit-value of the original number, appending a one to the front in the place of the sign bit to indicate that the number is negative, and then adding a one).
   \end{enumerate}
 \end{enumerate}
 
@@ -198,7 +198,18 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
+  \item[\textit{Work}] We will re-write this operation as addition of a negative. The 2's complement of $72_{10}$ is $01001000_2$ ($72_{10}=64_{10}+8_{10}=2^6+2^3=1000000_2+1000_2$). The 2's complement of $-85_{10}$ is $10101011_2$ ($85_{10}=64_{10}+16_{10}+4_{10}+1_{10}=2^6+2^4+2^2+2^0=1000000_2+10000_2+100_2+1_2=1010101_2$, and we flip the bits so we get $0101010_2$, add a sign bit to show that the number is negative $10101010_2$, and add one $10101011_2$).
+  \item[]
+  \begin{center}
+    \begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+      &   &   &   & 1 &   &   &   &   \\    \hline
+      & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    + & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\    \hline
+      & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1
+    \end{tabular}
+  \end{center}
+  \item[] Therefore, our result in 2's complement is $11110011_2$.
+  \item[\textit{Check}] To check, simply convert back to base ten: $11110011_2 = 1\times2^5+1\times2^3+1\times2^2+1\times2^1=46_{10}$.
 \end{enumerate}
 
 
