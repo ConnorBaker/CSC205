@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
 % Last Edited: January 15, 2016
-% Version: 0.1b
+% Version: 0.1c
 
 % Set document type
 \documentclass[12pt]{article}
@@ -22,7 +22,13 @@
 % No page number on the title page
 \pagenumbering{gobble}
 
-% Creates a title page
+% Create a title page
+% Start centering page contents vertically and horizontally
+\null
+\nointerlineskip
+\vfill
+\let \snewpage \newpage
+\let \newpage \relax
 \title{Quickly Converting Decimal to Binary}
 \author{Connor Baker}
 \date{January 2017\\Version 0.1a}
@@ -34,6 +40,10 @@
 \end{center}
 This paper briefly discusses ways to convert decimal numbers to their binary representation using several fast algorithms which exploit powers of two as a means of performing less arithmetic operations, with the caveat of using a look up table.
 
+% End centering page contents vertically and horizontally
+\let \newpage \snewpage
+\vfill
+\thispagestyle{empty}
 
 
 \newpage % New page
@@ -67,13 +77,12 @@ Given a number ABCDE in any base $\beta$, one can rewrite that number in what is
 \par In the table below, we perform the division necessary to calculate the binary representation of seven in base two. Each time we divide the decimal by two and get a remainder of one, we put a one in the rightmost place of our decimal representation. Likewise, if we have a remainder of zero, we append a zero. Once the value of the quotient is zero, we halt computation because we have found the binary representation in full.
 
 \begin{center}
-  \begin{tabular}{c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Binary Representation} \\
-    7 &   & \\
-    3 & 1 & 1 \\
-    1 & 1 & 11 \\
-    0 & 1 & 111 \\
-    0 & 0 & 111
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    7 &   &     & \\
+    3 & 1 & `1' & 1 \\
+    1 & 1 & `1' & 11 \\
+    0 & 1 & `1' & 111
   \end{tabular}
 \end{center}
 
@@ -93,6 +102,7 @@ Given a number ABCDE in any base $\beta$, one can rewrite that number in what is
 \end{center}
 \subsection{A Simple Approach}
 This is the algorithm we used in Section 1 for converting $7_{10}$ to binary.  To convert a decimal number to binary, we divide each resultant quotient by two repeatedly until we meet the halt condition (zero as a quotient), and then take the remainders at each step in reverse.
+
 \par In terms of an analog to computer science, we can think of keeping track of the remainders as adding each new one to the top of a stack, and at the end, pulling from the top of the stack (which reads all entries in reverse). This means that the remainder of the last division operation is going to be the most significant bit in the binary representation.
 
 \begin{center}
@@ -105,6 +115,7 @@ This is the algorithm we used in Section 1 for converting $7_{10}$ to binary.  T
 \end{center}
 
 \par We should be dissatisfied with the speed of this algorithm. For smaller numbers, this algorithm is fine. But what if we needed to compute the binary representation of a larger number, like $37_{10}$ or $51_{10}$ (both examples we have done in class)?
+
 \par Our goal then is to find a faster algorithm. The easiest way to start is by speculating. One thing that we could examine is what happens when we divide by a number that is larger than two -- perhaps a power of two.
 
 \subsection{Exploiting Powers of Two}
