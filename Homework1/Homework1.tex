@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
-% Last Edited: January 13, 2016
-% Version: 0.1e
+% Last Edited: January 14, 2016
+% Version: 0.2a
 
 \documentclass[12pt]{article}
 
@@ -108,7 +108,8 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}] Writing this problem in exponential notation is a good start: 67EA$_{16} = 6\times16^3+7\times16^2+14\times16^1+10\times2^0 = 24576+1792+224+10=26602_{10}$.
+  \item[\textit{Work}] We can convert from hexadecimal to binary very easily: by splitting the number at each place value, converting the numbers to binary with four place values (since hexadecimal numbers can be represented within four place values in binary -- if we were converting to octal, it would be three), and concatenating the result.
+  \item[] 6$_{16}$ 7$_{16}$ E$_{16}$ A$_{16}$ becomes $0110_2\ 0111_2\ 1110_2\ 1010_2$, which when concatenated and the lead zero(s) chopped off becomes $110011111101010_2$.
 \end{enumerate}
 
 
@@ -119,7 +120,8 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}] Writing this problem in exponential notation is a good start: $6204_8 = 6\times8^3+2\times8^2+4\times8^0 = 3072+128+4=3204_{10}$.
+  \item[\textit{Work}] We can convert from octal to binary very easily: by splitting the number at each place value, converting the numbers to binary with three place values (since hexadecimal numbers can be represented within three place values in binary), and concatenating the result.
+  \item[] 6$_8$ 2$_8$ 0$_8$ 4$_8$ becomes $110_2\ 010_2\ 000_2\ 100_2$, which when concatenated becomes $110010000100_2$.
 \end{enumerate}
 
 
@@ -187,7 +189,7 @@
     \end{tabular}
   \end{center}
   \item[] Therefore, our result in 2's complement is $0101110_2$.
-  \item[\textit{Check}] To check, simply convert back to base ten: $0101110_2 = 1\times2^5+1\times2^3+1\times2^2+1\times2^1=46_{10}$.
+  \item[\textit{Check}] To check, simply convert back to base ten (since the result was positive and not negative, we don't have to do additional arithmetic): $0101110_2 = 1\times2^5+1\times2^3+1\times2^2+1\times2^1=46_{10}$, so we know that the answer is correct.
 \end{enumerate}
 
 
@@ -209,7 +211,7 @@
     \end{tabular}
   \end{center}
   \item[] Therefore, our result in 2's complement is $11110011_2$.
-  \item[\textit{Check}]
+  \item[\textit{Check}] To check, we can convert back to base ten. Since the result was negative, there's a bit of math we have to do first. First, we'll flip the sign bit, then invert the bit values, and then add one. So, $11110011_2$ becomes $00001100_2$, which becomes $00001101_2$, which is equivalent to $1\times2^3+1\times2^2+1\times2^0=13_{10}$, so we know that the answer is correct.
 \end{enumerate}
 
 
@@ -220,18 +222,18 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}] We will re-write this operation as addition of a negative. The 2's complement of $31_{10}$ is $0111111_2$ (it's just one less than $32_{10}$ in binary, which is $1000000_2$, so therefore we have $111111_2$, and a sign bit of zero at the front). The 2's complement of $-11_{10}$ is $10101_2$ ($11_{10}=1011_2$, and we flip the bits so we get $0100_2$, add a sign bit to show that the number is negative $10100_2$, and add one $10101_2$).
+  \item[\textit{Work}] We will re-write this operation as addition of a negative. The 2's complement of $31_{10}$ is $011111_2$ (it's just one less than $32_{10}$ in binary, which is $100000_2$, so therefore we have $11111_2$, and a sign bit of zero at the front). The 2's complement of $-11_{10}$ is $110101_2$ ($11_{10}=01011_2$ (we must match the number of bits of the other number), and we flip the bits so we get $10100_2$, add a sign bit to show that the number is negative $110100_2$, and add one $110101_2$).
   \item[]
   \begin{center}
-    \begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
-      & 1 & 1 & 1 & 1 &   &   &   \\    \hline
-      & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
-    + & 0 & 0 & 1 & 0 & 1 & 0 & 0 \\    \hline
-      & 1 & 0 & 1 & 0 & 0 & 1 & 1
+    \begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+      & 1 & 1 & 1 & 1 & 1 &   \\    \hline
+      & 0 & 1 & 1 & 1 & 1 & 1 \\
+    + & 1 & 1 & 0 & 1 & 0 & 1 \\    \hline
+      & 0 & 1 & 0 & 1 & 0 & 0
     \end{tabular}
   \end{center}
-  \item[] Therefore, our result in 2's complement is $11110011_2$.
-  \item[\textit{Check}]
+  \item[] We should note that there was carry-out from the sign bit, but no overflow so our answer should be correct. Therefore, our result in 2's complement is $010100_2$.
+  \item[\textit{Check}] To check, simply convert back to base ten (since the result was positive and not negative, we don't have to do additional arithmetic): $10100_2 = 1\times2^4+1\times2^2=20_{10}$, so we know that we the answer is correct.
 \end{enumerate}
 
 % Instructions
@@ -263,7 +265,7 @@
   \item[\textit{Work}] Per the slide that was shown in class:
   \begin{enumerate}
     \item[\textit{Theorem}] Given an a number $n$, the range of values for an $n$-bit binary number as a 2's complement is $[-2^{n-1},(2^{n-1}-1)]$. As such, the largest positive value that can be stored is $2^{15}-1=32767_{10
-    }$. However, the largest negative value that can be stored is the negative of one more than the largest positive value, which would be $32768_{10}$.
+    }$. However, the largest negative value that can be stored is the negative of one more than the largest positive value, which would be $-32768_{10}$.
   \end{enumerate}
 \end{enumerate}
 
