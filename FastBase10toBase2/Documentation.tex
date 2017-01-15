@@ -1,9 +1,11 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
-% Last Edited: January 12, 2016
-% Version: 0.1a
+% Last Edited: January 15, 2016
+% Version: 0.1b
 
+% Set document type
 \documentclass[12pt]{article}
+
 % Import Packages
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -14,23 +16,23 @@
 \usepackage{gensymb}
 \usepackage{caption}
 \usepackage{tocloft}
-\usepackage[left=1.5in,right=1.5in,top=1.5in,bottom=1.5in]{geometry}
+\usepackage[left=1.25in,right=1.25in,top=1.25in,bottom=1.25in]{geometry}
 
 \begin{document}
 % No page number on the title page
 \pagenumbering{gobble}
 
 % Creates a title page
-  \title{Quickly Converting Decimal to Binary}
-  \author{Connor Baker}
-  \date{January 2017\\Version 0.1a}
+\title{Quickly Converting Decimal to Binary}
+\author{Connor Baker}
+\date{January 2017\\Version 0.1a}
 \maketitle
 
 % Create the Abstract section
 \begin{center}
-\subsection*{Abstract}
+  \subsection*{Abstract}
 \end{center}
-This paper briefly discusses ways to convert decimal numbers to their binary representation using several fast algorithms that exploit powers of two.
+This paper briefly discusses ways to convert decimal numbers to their binary representation using several fast algorithms which exploit powers of two as a means of performing less arithmetic operations, with the caveat of using a look up table.
 
 
 
@@ -56,26 +58,26 @@ This paper briefly discusses ways to convert decimal numbers to their binary rep
 
 % Create the A Brief Explanation of the Problem} section
 \begin{center}
-\section{From Decimal to Binary}
+  \section{From Decimal to Binary}
 \end{center}
-Given a number $ABCDE$ in any base $\beta$, one can rewrite that number as the sum of each digit multiplied by the base to a power, like so: $A\times\beta^4 + B\times\beta^3 + C\times\beta^2 + D\times\beta^1 + E\times\beta^0$. This is called exponential form. As an example, given the number $44675_{10}$ (the notation means $44675$ in base ten), we can rewrite it as $4\times10^4 + 4\times10^3 + 6\times10^2 + 7\times10^1 + 5\times10^0$.
+Given a number ABCDE in any base $\beta$, one can rewrite that number in what is called exponential form: that is, the sum of each digit multiplied by the base to a power. For our example ABCDE$_{\beta}$ (the notation means a number ABCDE in base $\beta$), we would write it as follows: A$\times\beta^4 +$ B$\times\beta^3 + $C$\times\beta^2 $D$\times\beta^1 + $E$\times\beta^0$. As an example, given the number $44675_{10}$, we can rewrite it as $4\times10^4 + 4\times10^3 + 6\times10^2 + 7\times10^1 + 5\times10^0$.
 
-\par In terms of changing the base of a number, the goal is to rewrite it as the sum of some numbers multiplied by the desired base to a power. Take for example the number $7_{10}$. We know that we can rewrite it as $7\times10^0$, but how could we express this number in base two? Our goal is to end up with something that looks like $a_1\times2^{n} + a_2\times2^{n-1} + ... + a_b\times2^0$. The question then becomes, how can we find those weights $\{a_1, a_2, ..., a_b\}$ that make the sum seven? The answer is division. \\
+\par In terms of changing the base of a number, the goal is to rewrite it as the sum of some numbers multiplied by the desired base to a power. Take for example the number $7_{10}$. We know that we can rewrite it as $7\times10^0$, but how could we express this number in base two? Our goal is to end up with something that looks like $a_1\times2^{n} + a_2\times2^{n-1} + ... + a_b\times2^0$. The question then becomes, how can we find those weights $\{a_1, a_2, ..., a_b\}$ that make the sum seven? The answer is division.
+
+\par In the table below, we perform the division necessary to calculate the binary representation of seven in base two. Each time we divide the decimal by two and get a remainder of one, we put a one in the rightmost place of our decimal representation. Likewise, if we have a remainder of zero, we append a zero. Once the value of the quotient is zero, we halt computation because we have found the binary representation in full.
 
 \begin{center}
-\begin{tabular}{c|c|c}
-  \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Binary Representation} \\
-  7 & 0 & \\
-  3 & 1 & 1 \\
-  1 & 1 & 11 \\
-  0 & 1 & 111 \\
-  0 & 0 & 111
-\end{tabular}
+  \begin{tabular}{c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Binary Representation} \\
+    7 &   & \\
+    3 & 1 & 1 \\
+    1 & 1 & 11 \\
+    0 & 1 & 111 \\
+    0 & 0 & 111
+  \end{tabular}
 \end{center}
 
-\par In the table above, we perform the division necessary to calculate the binary representation of seven in base two. Each time we divide the decimal by two and get a remainder of one, we put a one in the rightmost place of our decimal representation. Likewise, if we have a remainder of zero, we append a zero. Once the value of the quotient is zero, we halt computation because we have found the binary representation in full.
-
-\par In the first row, we have the original decimal, a remainder of zero since we have not begun to divide yet, and an empty binary representation. The second row has the whole number portion of the quotient, the remainder, and the beginnings of our binary representation. The third and fourth rows continue filling out binary representation. The fifth row is where we meet the halt condition, which is why the binary representation is unchanged.
+\par In the first row, we have the original decimal, an empty remainder since we have not begun to divide yet, and an empty binary representation. The second row has the whole number portion of the quotient, the remainder, and the beginnings of our binary representation. The third and fourth rows continue filling out binary representation. The fifth row is where we meet the halt condition, which is why the binary representation is unchanged.
 
 \par So know that we know our binary representation is $111_2$, we can say that $7_{10} = 1\times2^2+1\times2^1+1\times2^0 = 111_2$.
 
@@ -85,70 +87,217 @@ Given a number $ABCDE$ in any base $\beta$, one can rewrite that number as the s
 
 
 
-% Create the A Brief Explanation of the Problem} section
+% Create the Algorithm section
 \begin{center}
-\section{Algorithms}
+  \section{Algorithms}
 \end{center}
 \subsection{A Simple Approach}
-This is the algorithm used in the previous section for converting
+This is the algorithm we used in Section 1 for converting $7_{10}$ to binary.  To convert a decimal number to binary, we divide each resultant quotient by two repeatedly until we meet the halt condition (zero as a quotient), and then take the remainders at each step in reverse.
+\par In terms of an analog to computer science, we can think of keeping track of the remainders as adding each new one to the top of a stack, and at the end, pulling from the top of the stack (which reads all entries in reverse). This means that the remainder of the last division operation is going to be the most significant bit in the binary representation.
+
 \begin{center}
-\captionof{table}{x2 Algorithm}
-\begin{tabular}{c|c|c}
-    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
-    $(0,1)$   & '0' & $0\times2^0$ \\
-    $[1,2)$   & '1' & $1\times2^0$
-\end{tabular}
+  \begin{tabular}{c|c}
+    \textbf{Remainder} & \textbf{Push to Stack} \\
+    0 & `0' \\
+    1 & `1'
+  \end{tabular}
+  \captionof{table}{The $2^1$ Algorithm}
 \end{center}
+
+\par We should be dissatisfied with the speed of this algorithm. For smaller numbers, this algorithm is fine. But what if we needed to compute the binary representation of a larger number, like $37_{10}$ or $51_{10}$ (both examples we have done in class)?
+\par Our goal then is to find a faster algorithm. The easiest way to start is by speculating. One thing that we could examine is what happens when we divide by a number that is larger than two -- perhaps a power of two.
 
 \subsection{Exploiting Powers of Two}
-
 \begin{center}
-\captionof{table}{x4 Algorithm}
-\begin{tabular}{c|c|c}
-    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
-    $(0,1)$   & '00' & $0\times2^1 + 0\times2^0$ \\
-    $[1,2)$   & '01' & $0\times2^1 + 1\times2^0$ \\
-    $[2,3)$   & '10' & $1\times2^1 + 0\times2^0$ \\
-    $[3,4)$   & '11' & $1\times2^1 + 1\times2^0$
-\end{tabular}
+  \begin{tabular}{c|c}
+    \textbf{Remainder} & \textbf{Push to Stack} \\
+    0 & `00' \\
+    1 & `01' \\
+    2 & `10' \\
+    3 & `11'
+  \end{tabular}
+  \captionof{table}{The $2^2$ Algorithm}
 \end{center}
 
 \begin{center}
-\captionof{table}{x8 Algorithm}
-\begin{tabular}{c|c|c}
-    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
-    $(0,1)$   & '000' & $0\times2^2 + 0\times2^1 + 0\times2^0$ \\
-    $[1,2)$   & '001' & $0\times2^2 + 0\times2^1 + 1\times2^0$ \\
-    $[2,3)$   & '010' & $0\times2^2 + 1\times2^1 + 0\times2^0$ \\
-    $[3,4)$   & '011' & $0\times2^2 + 1\times2^1 + 1\times2^0$ \\
-    $[4,5)$   & '100' & $1\times2^2 + 0\times2^1 + 0\times2^0$ \\
-    $[5,6)$   & '101' & $1\times2^2 + 0\times2^1 + 1\times2^0$ \\
-    $[6,7)$   & '110' & $1\times2^2 + 1\times2^1 + 0\times2^0$ \\
-    $[7,8)$   & '111' & $1\times2^2 + 1\times2^1 + 1\times2^0$
-\end{tabular}
+  \begin{tabular}{c|c}
+    \textbf{Remainder} & \textbf{Push to Stack} \\
+    0 & `000' \\
+    1 & `001' \\
+    2 & `010' \\
+    3 & `011' \\
+    4 & `100' \\
+    5 & `101' \\
+    6 & `110' \\
+    7 & `111'
+  \end{tabular}
+  \captionof{table}{The $2^3$ Algorithm}
 \end{center}
 
 \begin{center}
-  \captionof{table}{x16 Algorithm}
-\begin{tabular}{c|c|c}
-    \textbf{Value of Quotient} & \textbf{Append} & \textbf{Subtract from Decimal} \\
-    $(0,1)$   & '0000' & $0\times2^3 + 0\times2^2 + 0\times2^1 + 0\times2^0$ \\
-    $[1,2)$   & '0001' & $0\times2^3 + 0\times2^2 + 0\times2^1 + 1\times2^0$ \\
-    $[2,3)$   & '0010' & $0\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0$ \\
-    $[3,4)$   & '0011' & $0\times2^3 + 0\times2^2 + 1\times2^1 + 1\times2^0$ \\
-    $[4,5)$   & '0100' & $0\times2^3 + 1\times2^2 + 0\times2^1 + 0\times2^0$ \\
-    $[5,6)$   & '0101' & $0\times2^3 + 1\times2^2 + 0\times2^1 + 1\times2^0$ \\
-    $[6,7)$   & '0110' & $0\times2^3 + 1\times2^2 + 1\times2^1 + 0\times2^0$ \\
-    $[7,8)$   & '0111' & $0\times2^3 + 1\times2^2 + 1\times2^1 + 1\times2^0$ \\
-    $[8,9)$   & '1000' & $1\times2^3 + 0\times2^2 + 0\times2^1 + 0\times2^0$ \\
-    $[9,10)$  & '1001' & $1\times2^3 + 0\times2^2 + 0\times2^1 + 1\times2^0$ \\
-    $[10,11)$ & '1010' & $1\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0$ \\
-    $[11,12)$ & '1011' & $1\times2^3 + 0\times2^2 + 1\times2^1 + 1\times2^0$ \\
-    $[12,13)$ & '1100' & $1\times2^3 + 1\times2^2 + 0\times2^1 + 0\times2^0$ \\
-    $[13,14)$ & '1101' & $1\times2^3 + 1\times2^2 + 0\times2^1 + 1\times2^0$ \\
-    $[14,15)$ & '1110' & $1\times2^3 + 1\times2^2 + 1\times2^1 + 0\times2^0$ \\
-    $[15,16)$ & '1111' & $1\times2^3 + 1\times2^2 + 1\times2^1 + 1\times2^0$
-\end{tabular}
+  \begin{tabular}{c|c}
+    \textbf{Remainder} & \textbf{Push to Stack} \\
+    0 & `0000' \\
+    1 & `0001' \\
+    2 & `0010' \\
+    3 & `0011' \\
+    4 & `0100' \\
+    5 & `0101' \\
+    6 & `0110' \\
+    7 & `0111' \\
+    8 & `1000' \\
+    9 & `1001' \\
+    10 & `1010' \\
+    11 & `1011' \\
+    12 & `1100' \\
+    13 & `1101' \\
+    14 & `1110' \\
+    15 & `1111'
+  \end{tabular}
+  \captionof{table}{The $2^4$ Algorithm}
+\end{center}
+
+
+
+\newpage % New page
+
+
+
+% Create the Examples section
+\begin{center}
+  \section{Examples}
+\end{center}
+In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $128_{10}$ to binary using each of the four algorithms covered in this paper to show the difference in speed.
+\subsection{The $2^1$ Algorithm}
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    37 &   &     & \\
+    18 & 1 & `1' & 1 \\
+    9  & 0 & `0' & 01 \\
+    4  & 1 & `1' & 101 \\
+    2  & 0 & `0' & 0101 \\
+    1  & 0 & `0' & 00101 \\
+    0  & 1 & `1' & 100101
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    55 &   &     & \\
+    27 & 1 & `1' & 1 \\
+    13 & 1 & `1' & 11 \\
+    6  & 1 & `1' & 111 \\
+    3  & 0 & `0' & 0111 \\
+    1  & 1 & `1' & 10111 \\
+    0  & 1 & `1' & 110111
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    128 &   &     & \\
+    64  & 0 & `0' & 0 \\
+    32  & 0 & `0' & 00 \\
+    16  & 0 & `0' & 000 \\
+    8   & 0 & `0' & 0000 \\
+    4   & 0 & `0' & 00000 \\
+    2   & 0 & `0' & 000000 \\
+    1   & 0 & `0' & 0000000 \\
+    0   & 1 & `1' & 10000000
+  \end{tabular}
+\end{center}
+
+\subsection{The $2^2$ Algorithm}
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    37 &   &      & \\
+    9  & 1 & `01' & 01 \\
+    2  & 1 & `01' & 0101 \\
+    0  & 2 & `11' & 100101
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    55 &   &      & \\
+    13 & 3 & `11' & 11 \\
+    3  & 1 & `01' & 0111 \\
+    0  & 3 & `11' & 110111
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    128 &   &      & \\
+    32  & 0 & `00' & 00 \\
+    8   & 0 & `00' & 0000 \\
+    2   & 0 & `00' & 000000 \\
+    0   & 1 & `01' & 10000000
+  \end{tabular}
+\end{center}
+
+\subsection{The $2^3$ Algorithm}
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    37 &   &       & \\
+    4  & 5 & `101' & 101 \\
+    0  & 4 & `100' & 100101
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    55 &   &       & \\
+    6  & 7 & `111' & 111 \\
+    0  & 6 & `110' & 110111
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    128 &   &       & \\
+    16  & 0 & `000' & 000 \\
+    2   & 0 & `000' & 000000 \\
+    0   & 2 & `010' & 010000000
+  \end{tabular}
+\end{center}
+We notice here that we have a leading zero. As it holds no value, it's fine to discard from the final representation. This is a result of using a power that is larger than two, since we have more than a single bit.
+
+\subsection{The $2^4$ Algorithm}
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    37 &   &        & \\
+    2  & 5 & `0101' & 0101 \\
+    0  & 2 & `0010' & 00100101
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    55 &   &        & \\
+    3  & 7 & `0111' & 0111 \\
+    0  & 3 & `0011' & 00110111
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    128 &   &        & \\
+    8   & 0 & `0000' & 0000 \\
+    0   & 8 & `1000' & 10000000
+  \end{tabular}
 \end{center}
 
 \end{document}
