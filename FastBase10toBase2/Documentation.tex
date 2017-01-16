@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
 % Last Edited: January 15, 2016
-% Version: 0.1c
+% Version: 0.1d
 
 % Set document type
 \documentclass[12pt]{article}
@@ -119,6 +119,12 @@ This is the algorithm we used in Section 1 for converting $7_{10}$ to binary.  T
 \par Our goal then is to find a faster algorithm. The easiest way to start is by speculating. One thing that we could examine is what happens when we divide by a number that is larger than two -- perhaps a power of two.
 
 \subsection{Exploiting Powers of Two}
+Given any number $n\in\mathbb{N}$, $n$ \textbf{mod} 2 will be either zero or one. With the algorithm we have above, we see that we account for both possibilities of the remainder. If we divide by a larger multiple of two, like four, we now have a different number of possible remainders.
+
+\par Given any number $n\in\mathbb{N}$, $n$ \textbf{mod} 4 will be either zero, one, two, or three. As such, we have to take into account these possibilities. Interestingly enough, we must increase the number of bits that we push to the stack at once. The numbers zero and one can be represented in binary with a single bit. However, the numbers two and three require two bits. In general, if we divide by $2^n$, we will have to take into account remainders for $[0,2^n-1]$, and the binary for each remainder must have $n$ place values.
+
+\par With this algorithm, given an arbitrarily large number, the number of iterations we perform is typically about half of the number we would perform using the $2^1$ algorithm.
+
 \begin{center}
   \begin{tabular}{c|c}
     \textbf{Remainder} & \textbf{Push to Stack} \\
@@ -129,6 +135,10 @@ This is the algorithm we used in Section 1 for converting $7_{10}$ to binary.  T
   \end{tabular}
   \captionof{table}{The $2^2$ Algorithm}
 \end{center}
+
+\par Given any number $n\in\mathbb{N}$, $n$ \textbf{mod} 8 will be in $[0,7]$ (per the range of remainders of $[0,2^n-1]$). Again, we have to take into account these possibilities. Since we're dividing by $2^3$, the binary for each remainder must have $n$ place values.
+
+\par With this algorithm, given an arbitrarily large number, the number of iterations we perform is typically about half of the number we would perform using the $2^2$ algorithm.
 
 \begin{center}
   \begin{tabular}{c|c}
@@ -144,6 +154,10 @@ This is the algorithm we used in Section 1 for converting $7_{10}$ to binary.  T
   \end{tabular}
   \captionof{table}{The $2^3$ Algorithm}
 \end{center}
+
+\par Given any number $n\in\mathbb{N}$, $n$ \textbf{mod} 16 will be in $[0,15]$ (per the range of remainders of $[0,2^n-1]$). Again, we have to take into account these possibilities. Since we're dividing by $2^4$, the binary for each remainder must have $n$ place values.
+
+\par With this algorithm, given an arbitrarily large number, the number of iterations we perform is typically about half of the number we would perform using the $2^3$ algorithm.
 
 \begin{center}
   \begin{tabular}{c|c}
