@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
 % Last Edited: January 16, 2016
-% Version: 0.2a
+% Version: 0.2b
 
 % Set document type
 \documentclass[12pt]{article}
@@ -31,7 +31,7 @@
 \let \newpage \relax
 \title{Quickly Converting Decimal to Binary}
 \author{Connor Baker}
-\date{January 2017\\Version 0.2a}
+\date{January 2017\\Version 0.2b}
 \maketitle
 
 % Create the Abstract section
@@ -78,7 +78,7 @@ Given a number ABCDE in any base $\beta$, one can rewrite that number in what is
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     7 &   &     & \\
     3 & 1 & `1' & 1 \\
     1 & 1 & `1' & 11 \\
@@ -196,7 +196,26 @@ Per our range of possible remainders given a number $p$, if we decide to divide 
 
 \par With this algorithm, given an arbitrarily large number, the number of iterations we perform is typically about half of the number we would perform using the $2^3$ algorithm.
 
+\subsubsection{The $2^n$ Algorithm}
+Per our range of possible remainders given a number $p$, if we decide to divide by $2^n$, our range of remainders is now $[0,n-1]$. As such, we have to take into account these possibilities.
 
+\par Here, since we are dividing by $2^n$, we must use $n$ decimal places for \textit{all} binary representations of the remainders.
+
+\begin{center}
+  \begin{tabular}{c|c}
+    \textbf{Remainder} & \textbf{Push to Stack} \\
+    0      & $`0000\dots00'$ \\
+    1      & $`0000\dots01'$ \\
+    \vdots & \vdots \\
+    \vdots & \vdots \\
+    \vdots & \vdots \\
+    $n-1$  & $`1111\dots10'$ \\
+    $n$    & $`1111\dots11'$
+  \end{tabular}
+  \captionof{table}{The $2^n$ Algorithm}
+\end{center}
+
+\par With this algorithm, given an arbitrarily large number, the number of iterations we perform is typically about half of the number we would perform using the $2^{n-1}$ algorithm.
 
 \newpage % New page
 
@@ -210,7 +229,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 \subsection{The $2^1$ Algorithm}
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     37 &   &     & \\
     18 & 1 & `1' & 1 \\
     9  & 0 & `0' & 01 \\
@@ -223,7 +242,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     55 &   &     & \\
     27 & 1 & `1' & 1 \\
     13 & 1 & `1' & 11 \\
@@ -236,7 +255,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     128 &   &     & \\
     64  & 0 & `0' & 0 \\
     32  & 0 & `0' & 00 \\
@@ -252,7 +271,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 \subsection{The $2^2$ Algorithm}
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     37 &   &      & \\
     9  & 1 & `01' & 01 \\
     2  & 1 & `01' & 0101 \\
@@ -262,7 +281,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     55 &   &      & \\
     13 & 3 & `11' & 11 \\
     3  & 1 & `01' & 0111 \\
@@ -272,7 +291,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     128 &   &      & \\
     32  & 0 & `00' & 00 \\
     8   & 0 & `00' & 0000 \\
@@ -284,7 +303,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 \subsection{The $2^3$ Algorithm}
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     37 &   &       & \\
     4  & 5 & `101' & 101 \\
     0  & 4 & `100' & 100101
@@ -293,7 +312,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     55 &   &       & \\
     6  & 7 & `111' & 111 \\
     0  & 6 & `110' & 110111
@@ -302,7 +321,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     128 &   &       & \\
     16  & 0 & `000' & 000 \\
     2   & 0 & `000' & 000000 \\
@@ -314,7 +333,7 @@ We notice here that we have a leading zero. As it holds no value, it's fine to d
 \subsection{The $2^4$ Algorithm}
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     37 &   &        & \\
     2  & 5 & `0101' & 0101 \\
     0  & 2 & `0010' & 00100101
@@ -323,7 +342,7 @@ We notice here that we have a leading zero. As it holds no value, it's fine to d
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     55 &   &        & \\
     3  & 7 & `0111' & 0111 \\
     0  & 3 & `0011' & 00110111
@@ -332,7 +351,7 @@ We notice here that we have a leading zero. As it holds no value, it's fine to d
 
 \begin{center}
   \begin{tabular}{c|c|c|c}
-    \textbf{Value of Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
+    \textbf{Quotient} & \textbf{Remainder} & \textbf{Push to Stack} & \textbf{Binary Representation} \\
     128 &   &        & \\
     8   & 0 & `0000' & 0000 \\
     0   & 8 & `1000' & 10000000
