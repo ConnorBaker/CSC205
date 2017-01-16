@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 12, 2016
 % Last Edited: January 16, 2016
-% Version: 0.2b
+% Version: 0.2c
 
 % Set document type
 \documentclass[12pt]{article}
@@ -31,7 +31,7 @@
 \let \newpage \relax
 \title{Quickly Converting Decimal to Binary}
 \author{Connor Baker}
-\date{January 2017\\Version 0.2b}
+\date{January 2017\\Version 0.2c}
 \maketitle
 
 % Create the Abstract section
@@ -209,13 +209,15 @@ Per our range of possible remainders given a number $p$, if we decide to divide 
     \vdots & \vdots \\
     \vdots & \vdots \\
     \vdots & \vdots \\
-    $n-1$  & $`1111\dots10'$ \\
-    $n$    & $`1111\dots11'$
+    $n-2$  & $`1111\dots10'$ \\
+    $n-1$    & $`1111\dots11'$
   \end{tabular}
   \captionof{table}{The $2^n$ Algorithm}
 \end{center}
 
 \par With this algorithm, given an arbitrarily large number, the number of iterations we perform is typically about half of the number we would perform using the $2^{n-1}$ algorithm.
+
+
 
 \newpage % New page
 
@@ -267,6 +269,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
     0   & 1 & `1' & 10000000
   \end{tabular}
 \end{center}
+Though all correct, we see that with these examples the number of iterations we have to go through to get the binary representation grows as the size of the number grows.
 
 \subsection{The $2^2$ Algorithm}
 \begin{center}
@@ -275,7 +278,7 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
     37 &   &      & \\
     9  & 1 & `01' & 01 \\
     2  & 1 & `01' & 0101 \\
-    0  & 2 & `11' & 100101
+    0  & 2 & `10' & 100101
   \end{tabular}
 \end{center}
 
@@ -299,6 +302,8 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
     0   & 1 & `01' & 10000000
   \end{tabular}
 \end{center}
+Here, we see that there were half as many arithmetic operations in each example as there was in those of the $2^1$ algorithm.
+\par One should note though that because we are appending two bits each time, there is the possibility that we generate a leading zero. However, as a leading zero, it holds no value and can be discarded.
 
 \subsection{The $2^3$ Algorithm}
 \begin{center}
@@ -328,7 +333,8 @@ In this section, we will be converting the numbers $37_{10}$, $55_{10}$, and $12
     0   & 2 & `010' & 010000000
   \end{tabular}
 \end{center}
-We notice here that we have a leading zero. As it holds no value, it's fine to discard from the final representation. This is a result of using a power that is larger than two, since we have more than a single bit.
+Again, we see that there were nearly as many arithmetic operations in each example as there was in those of the $2^1$ algorithm (the ceiling function of one half the number of operations to be exact).
+\par As discussed in the examples for the $2^2$ algorithm the leading zero is the result of using a power that is larger than two, since we append more than a single bit at a time.
 
 \subsection{The $2^4$ Algorithm}
 \begin{center}
@@ -357,5 +363,6 @@ We notice here that we have a leading zero. As it holds no value, it's fine to d
     0   & 8 & `1000' & 10000000
   \end{tabular}
 \end{center}
+Due to the size of the numbers, this is the point at which we see a decrease in the number of operations in only the last example. For larger numbers, we should see this halving of the number of operations each time the power of two we divide by increases by one.
 
 \end{document}
