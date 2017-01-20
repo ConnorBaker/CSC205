@@ -1,0 +1,93 @@
+% Author: Connor Baker
+% Date Created: January 20, 2016
+% Last Edited: January 20, 2016
+% Version: 0.1a
+
+% Declare type of document
+\documentclass[10pt]{article}
+
+% Import Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathtools,mathdots}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+
+% Page Formatting
+\usepackage[left=0.5in,right=0.5in,top=0.5in,bottom=0.5in]{geometry}
+
+% Make special command
+\newcommand{\bcf}{\begin{center}\bfseries}
+\newcommand{\bct}{\begin{center}\ttfamily}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+
+% Begin the document
+\begin{document}
+
+% Create the Header
+\begin{center}
+  \subsection*{MIPS Instruction Reference List\\Connor Baker, January 20$^\text{th}$ 2017}
+\end{center}
+
+\subsection*{Core Instruction Set}
+\begin{center}
+  \begin{longtable}{>{\bc}m{9em}<{\ec}|>{\bct}m{5em}<{\ec}|>{\bc}m{4em}<{\ec}|>{\bc}m{13em}<{\ec}|>{\bc$}m{13em}<{$\ec}}
+    Name & Mnemonic & Format & Operation (in Verilog) & $OPCODE/Funct (Hex)$ \tabularnewline \hline \endhead
+
+    Add & add & R & R[rd]=R[rs]+R[rt] & (1)\ 0/20_{16} \tabularnewline
+
+    Add Immediate & addi & I & R[rt]=R[rs]+SigExtImm & (1,2)\ 8_{16} \tabularnewline
+
+    Add Imm. Unsigned & addiu & I & R[rt]=R[rs]+SigExtImm & (2)\ 9_{16} \tabularnewline
+
+    Add Unsigned & addu & R & R[rd]=R[rs]+R[rt] & 0/21_{16} \tabularnewline
+
+    And & and & R & R[rd]=R[rs]\&R[rt] & (1)\ 0/24_{16} \tabularnewline
+
+    And Immediate & andi & I & R[rt]=R[rs]\&ZeroExtImm & (3)\ $C$_{16} \tabularnewline
+
+    Branch On Equal & beq & I & if(R[rs]==R[rt]) PC=PC+4+BranchAddr & (4)\ 4_{16} \tabularnewline
+
+    Branch On Not Equal & bne & I & if(R[rs]!=R[rt]) PC=PC+4+BranchAddr & (4)\ 5_{16} \tabularnewline
+
+    Jump & j & J & PC=JumpAddr & (5)\ 2_{16} \tabularnewline
+
+    Jump And Link & jal & J & R[31]=PC+8; PC=JumpAddr & (5)\ 3_{16} \tabularnewline
+
+    Jump Register & jr & R & PC=R[rs] & 0/08_{16} \tabularnewline
+
+    Load Byte Unsigned & lbu & I & R[rt]=\{24'b0,M[R[rs]] +SignExtImm](7:0)\} & (2)\ 24_{16} \tabularnewline
+
+    Load Halfword Unsigned & lhu & I & R[rt]=\{16'b0,M[R[rs]] +SignExtImm](15:0)\} & (2)\ 25_{16} \tabularnewline
+
+    Load Linked & ll & I & R[rt]=M[R[rs]] +SignExtImm] & (2,7)\ 30_{16} \tabularnewline
+
+    Load Upper Imm. & lui & I & R[rt]=\{imm, 16'b0\} & $F$_{16} \tabularnewline
+
+    Load Word & lw & I & R[rt]=M[R[rs] +SignExtImm] & (2)\ 23_{16} \tabularnewline
+
+    Nor & nor & R & R[rd]=$\sim (R[rs]\ \ |\left\right R[rt])$ & 0/27_{16} \tabularnewline
+
+    Or & or & R & R[rd]=$\text{(R[rs]}\ \ |\left\right\text{R[rt])}$ & 0/25_{16} \tabularnewline
+
+    Or Immediate & ori & I & R[rt]=$\text{R[rs]}\ \ |\left\right\text{ZeroExtImm}$ & (3)\ $D$_{16} \tabularnewline
+
+    Set Less Than & slt & R & R[rd]=(R[rs]$<$R[rt])? 1 : 0 & 0/$2A$_{16} \tabularnewline
+
+    Set Less Than Imm. & slti & I & R[rt]=(R[rs]$<$SignExtImm) ? 1 : 0 & (2)\ $A$_{16} \tabularnewline
+
+    Set Less Than Imm. Unsigned & sltiu & I & R[rt]=(R[rs]$<$SignExtImm) ? 1 : 0 & (2,6)\ $B$_{16} \tabularnewline
+
+    Set Less Than Unsigned & sltu & R & R[rd]=(R[rs]$<$R[rt]) ? 1 : 0 & (6)\ 0/$2B$_{16} \tabularnewline
+
+    Shift Left Logical & sll & R & R[rd]=R[rt]$<<$shamt & 0/00_{16} \tabularnewline
+
+    Shift Right Logical & srl & R & R[rd]=R[rt]$>>>$shamt & 0/02_{16} \tabularnewline
+
+  \end{longtable}
+\end{center}
+
+
+\end{document}
