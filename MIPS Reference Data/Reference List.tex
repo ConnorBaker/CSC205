@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 20, 2016
 % Last Edited: January 20, 2016
-% Version: 0.1b
+% Version: 0.1c
 
 % Declare type of document
 \documentclass[10pt]{article}
@@ -15,7 +15,7 @@
 \usepackage{longtable}
 
 % Page Formatting
-\usepackage[left=0.5in,right=0.5in,top=0.5in,bottom=0.5in]{geometry}
+\usepackage[left=0.75in,right=0.75in,top=0.75in,bottom=0.75in]{geometry}
 
 % Make special command
 \newcommand{\bcf}{\begin{center}\bfseries}
@@ -100,18 +100,97 @@
   \end{longtable}
 \end{center}
 
-% Explain what the warnings mean
-\begin{enumerate}
-  {\setlength\itemindent{150pt} \item[(1)] May cause overflow exception}
-  {\setlength\itemindent{150pt} \item[(2)] SignExtImm = \{16\{immediate[15], immediate\}\}}
-  {\setlength\itemindent{150pt} \item[(3)] ZeroExtImm = \{16\{1B'0\}, immediate\}}
-  {\setlength\itemindent{150pt} \item[(4)] BranchAddr = \{14\{immediate[15]\}, immediate, 2'B0\}}
-  {\setlength\itemindent{150pt} \item[(5)] JumpAddr = \{PC+4[31:28], address, 2'B0\}}
-  {\setlength\itemindent{150pt} \item[(6)] Operands considered unsigned numbers (vs. 2's comp.)}
-  {\setlength\itemindent{150pt} \item[(7)] Atomic test \& set pair; R[rt]=1 if pair atomic, 0 if pair not atomic}
-\end{enumerate}
+
 
 \subsection*{Basic Instruction Formats}
+
+
+
+\subsection*{Arithmetic Core Instruction Set}
+\begin{center}
+  \begin{longtable}{>{\bc}m{9em}<{\ec}|>{\bct}m{5em}<{\ec}|>{\bc}m{4em}<{\ec}|>{\bc}m{13em}<{\ec}|>{\bc$}m{13em}<{$\ec}}
+    Name & Mnemonic & Format & Operation & $OPCODE/FMT/FT/Funct (Hex)$ \tabularnewline \hline \endhead
+
+    Branch On FP True & bolt & FI & if(FPcond)PC=PC+4 +BranchAddr & (4)\ 11/8/1/-- \tabularnewline
+
+    Branch On FP False & bolf & FI & if(!FPcond)PC=PC+4 +BranchAddr & (4)\ 11/8/0/-- \tabularnewline
+
+    Divide & div & R & Lo=R[rs]/R[rt]; Hi=R[rs]\%R[rt] & 0/--/--/$la$ \tabularnewline
+
+    Divide Unsigned & divu & R & Lo=R[rs]/R[rt]; Hi=R[rs]\%R[rt] & (6)\ 0/--/--/$la$ \tabularnewline
+
+    FP Add Single & add.s & FR & F[fd]=F[fs]+F[ft] & 11/10/--/0 \tabularnewline
+
+    FP Add Double & add.d & FR & \{F[fd], F[fd+1]\} = \{F[fs]+F[fs+1]\} + \{F[ft]+F[ft+1]\} & 11/11/--/0 \tabularnewline
+
+    FP Compare Single & c.x.s$^{*}$ & FR & FPcond = (F[fs] $op$ F[ft]) ? 1 : 0 & 11/10/--/y \tabularnewline
+
+    FP Compare Double & c.x.d$^{*}$ & FR & FPcond = (\{F[fs], F[fs+1]\} $op$ \{F[ft], F[ft+1]\}) ? 1 : 0 & 11/11/--/y \tabularnewline
+
+  \end{longtable}
+\end{center}
+
+
+
+\subsection*{Floating-Point Instruction Formats}
+
+
+
+\subsection*{Pseudoinstruction Set}
+
+
+
+\subsection*{Register Name, Number, Use, Call Convention}
+
+
+
+\subsection*{Opcodes, Base Conversion, ASCII Symbols}
+
+
+
+\subsection*{IEEE 754 Floating-Point Standard}
+
+
+
+\subsection*{IEEE Single and Double Precision Formats}
+
+
+
+\subsection*{Memory Allocation}
+
+
+
+\subsection*{Stack Frame}
+
+
+
+\subsection*{Data Alignment}
+
+
+
+\subsection*{Exception Control Registers: Cause and Status}
+
+
+
+\subsection*{Exception Codes}
+
+
+
+\subsection*{Size Prefixes}
+
+
+
+% Explain what the warnings mean
+\begin{enumerate}
+  {\setlength\itemindent{125pt} \item[] $^{*}$}($x$ is \texttt{eq}, \texttt{lt}, or \texttt{le}) ($op$ is $==$, $<$, or $\leq$) ($y$ is 32, 3C, or 3E)
+  {\setlength\itemindent{125pt} \item[(1)] May cause overflow exception}
+  {\setlength\itemindent{125pt} \item[(2)] SignExtImm = \{16\{immediate[15], immediate\}\}}
+  {\setlength\itemindent{125pt} \item[(3)] ZeroExtImm = \{16\{1B'0\}, immediate\}}
+  {\setlength\itemindent{125pt} \item[(4)] BranchAddr = \{14\{immediate[15]\}, immediate, 2'B0\}}
+  {\setlength\itemindent{125pt} \item[(5)] JumpAddr = \{PC+4[31:28], address, 2'B0\}}
+  {\setlength\itemindent{125pt} \item[(6)] Operands considered unsigned numbers (vs. 2's comp.)}
+  {\setlength\itemindent{125pt} \item[(7)] Atomic test \& set pair; R[rt]=1 if pair atomic, 0 if pair not atomic}
+\end{enumerate}
 
 
 \end{document}
