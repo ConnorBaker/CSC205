@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: January 20, 2016
 % Last Edited: January 20, 2016
-% Version: 0.1a
+% Version: 0.1b
 
 % Declare type of document
 \documentclass[10pt]{article}
@@ -28,7 +28,7 @@
 
 % Create the Header
 \begin{center}
-  \subsection*{MIPS Instruction Reference List\\Connor Baker, January 20$^\text{th}$ 2017}
+  \subsection*{MIPS Instruction Reference Data\\Connor Baker, January 20$^\text{th}$ 2017}
 \end{center}
 
 \subsection*{Core Instruction Set}
@@ -86,8 +86,32 @@
 
     Shift Right Logical & srl & R & R[rd]=R[rt]$>>>$shamt & 0/02_{16} \tabularnewline
 
+    Store Byte & sb & I & M[R[rs]+SignExtImm](7:0) =R[rt](7:0) & (2)\ 28_{16} \tabularnewline
+
+    Store Conditional & sc & I & M[R[rs]+SignExtImm]=R[rt]; R[rt]=($atomic$) ? 1 : 0 & (2,7)\ 38_{16} \tabularnewline
+
+    Store Halfword & sh & I & M[R[rs]+SignExtImm](15:0) =R[rt](15:0) & (2)\ 29_{16} \tabularnewline
+
+    Store Word & sw & I & M[R[rs]+SignExtImm]=R[rt] & (2)\ 2$B$_{16} \tabularnewline
+
+    Subtract & sub & R & R[rd]=R[rs]-R[rt] & (1)\ 0/22_{16} \tabularnewline
+
+    Subtract Unsigned & subu & R & R[rd]=R[rs]-R[rt] & 0/23_{16} \tabularnewline
   \end{longtable}
 \end{center}
+
+% Explain what the warnings mean
+\begin{enumerate}
+  {\setlength\itemindent{150pt} \item[(1)] May cause overflow exception}
+  {\setlength\itemindent{150pt} \item[(2)] SignExtImm = \{16\{immediate[15], immediate\}\}}
+  {\setlength\itemindent{150pt} \item[(3)] ZeroExtImm = \{16\{1B'0\}, immediate\}}
+  {\setlength\itemindent{150pt} \item[(4)] BranchAddr = \{14\{immediate[15]\}, immediate, 2'B0\}}
+  {\setlength\itemindent{150pt} \item[(5)] JumpAddr = \{PC+4[31:28], address, 2'B0\}}
+  {\setlength\itemindent{150pt} \item[(6)] Operands considered unsigned numbers (vs. 2's comp.)}
+  {\setlength\itemindent{150pt} \item[(7)] Atomic test \& set pair; R[rt]=1 if pair atomic, 0 if pair not atomic}
+\end{enumerate}
+
+\subsection*{Basic Instruction Formats}
 
 
 \end{document}
