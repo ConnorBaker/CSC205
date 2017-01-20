@@ -1,0 +1,428 @@
+% Author: Connor Baker
+% Date Created: January 19, 2016
+% Last Edited: January 19, 2016
+% Version: 0.1a
+
+% Declare type of document
+\documentclass[12pt]{article}
+
+% Import Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathtools,mathdots}
+\usepackage{enumitem}
+\usepackage{array}
+
+% Page Formatting
+\usepackage[left=1.25in,right=1.25in,top=1.25in,bottom=1.25in]{geometry}
+
+% Begin the document
+\begin{document}
+
+% Create the Header
+\begin{center}
+  \subsection*{Lecture 2 Notes\\Connor Baker, January 19$^\text{th}$ 2017}
+\end{center}
+
+
+
+\section*{Agenda}
+The agenda for today's lecture is as follows:
+\begin{enumerate}
+  \item Arithmetic operations
+  \item Logical operations
+  \item Data transfer
+\end{enumerate}
+
+
+
+\section{Programming Hierarchy}
+To convert a high level language (HLL) into its machine readable equivalent, the compiler: (see Figure (1))
+\begin{enumerate}
+  \item Converts the HLL into \textit{assembly language} (ASM)
+  \item Translates the ASM into 0's and 1's for the hardware
+  \item Writes the translated form to an \textit{object module} (a file with the extension .obj)
+  \item A \textit{linker} converts the object module into an executable file, formatted for the target operating system
+  \begin{enumerate}
+    \item The linker also grabs libraries used by the program to be included in the executable
+  \end{enumerate}
+  \item The executable file is loaded by the OS and executed directly by the hardware
+\end{enumerate}
+
+
+
+\subsection{What is ASM?}
+\begin{enumerate}
+  \item The symbolic representation of 0's and 1's the CPU understands
+  \item ASM allows humans to easily read and interpret CPU instructions
+  \item ASM is considered a low level language (LLL)
+  \item ASM is not compiled -- it is assembled by the assembler
+\end{enumerate}
+
+
+
+\subsection{HLL vs ASM}
+HLL's such as Java, C, C++ are all machine independent. LLL's like ASM are all machine dependent. The language of the ASM output is determined by the target hardware. See Figure (2) for how Java runs everywhere
+
+
+
+\subsection{ASM - General}
+\begin{enumerate}
+  \item HLL's have verbs, statements, declarations, etc.
+  \item LLL's have \textit{instructions} and \textit{operands}
+  \begin{enumerate}
+    \item[] \textbf{Instructions}: The "words" of a machine language
+    \item[] \textbf{Instruction Set}: The entire list of instructions recognizable by the computer
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{The MIPS CPU}
+\begin{enumerate}
+  \item A reduced instruction set computer (RISC)
+  \item The basis for your learning in this class
+  \item MIPS CPUs can be found as embedded processors in game consoles and TVs
+  \item We will learn MIPS ASM
+  \begin{enumerate}
+    \item We must learn not only the operand set, but also the register set
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{MIPS ASM}
+\begin{enumerate}
+  \item General format:
+  \begin{enumerate}
+    \item \{lable\}: instruction operand\{operand,\{operand,\{...\}\}\} \# comment
+  \end{enumerate}
+  \item Fields within braces are optional
+  \item Field descriptions
+  \begin{enumerate}
+    \item[Label] names a particular instruction
+    \item[Instruction] symbol for the machine instruction
+    \item[Operand] register, value, or label
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{MIPS Registers}
+\begin{enumerate}
+  \item Registers are temporary storage locations within the CPU
+  \item Used by CPU hardware for processing instructions
+  \item Provides the data needed for performing operations
+  \item Provides a place to receive data from main memory or a source for data to be stored to main memory
+  \item Every CPU has a set of registers (a register set)
+  \begin{enumerate}
+    \item Most CPUs have a different number of registers
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{MIPS Register Set}
+\begin{enumerate}
+  \item 32 registers total, each 32 bits in size
+  \item Common registers
+  \begin{enumerate}
+    \item \$T0-\$T7
+    \item \$S0-\$S7
+  \end{enumerate}
+  \item Special registers
+  \begin{enumerate}
+    \item \$Zero,\$AT,\$GP,\$FP,\$RA
+  \end{enumerate}
+  \item Other registers
+  \begin{enumerate}
+    \item \$V0-\$V1
+    \item \$A0-\$A3
+    \item \$T8-\$T9
+    \item \$K0-\$K1
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{MIPS ASM}
+\begin{enumerate}
+  \item Consider this HLL code example:
+  \begin{enumerate}
+    \item[] $F=(G+H)-(I+J)$
+  \end{enumerate}
+  \item Assume the following:
+  \begin{enumerate}
+    \item $F$ is \$S0
+    \item $G$ is \$S1
+    \item $H$ is \$S2
+    \item $I$ is \$S3
+    \item $J$ is \$S4
+  \end{enumerate}
+  \item The MIPS equivalent code for this statement is:
+  \begin{enumerate}
+    \item[add] \$T0,\$S1,\$S2 \# $\$T0=G+H$
+    \item[add] \$T1,\$S3,\$S4 \# $\$T1=I+J$
+    \item[sub] \$S0,\$T0,\$T1 \# $F=(G+H)-(I+J)$
+  \end{enumerate}
+  \item[] NEVER ASSUME THAT A REGISTER IS EMPTY.
+\end{enumerate}
+
+
+
+\subsection{Registers, variables, and memory}
+\begin{enumerate}
+  \item How did the registers become associated with these variables?
+  \begin{enumerate}
+    \item Remember that variables are stored in the main memory
+    \item Somehow we must get data from main memory into a register and vice versa
+  \end{enumerate}
+  \item To do this, we must first know where in memory the variable is stored
+  \begin{enumerate}
+    \item This is called the address of the variable
+  \end{enumerate}
+  \item We then use data transfer instructions to move data back and forth
+  \begin{enumerate}
+    \item These instructions use the address you provide and the register you specify to move the data
+  \end{enumerate}
+  \item MIPS provides two basic data transfer instructions, LOAD WORD and STORE WORD
+  \item Using the last example $F=(G+H)-(I+J)$
+  \begin{enumerate}
+    \item[lw] \$S1,G
+    \item[lw] \$S2,H
+    \item[lw] \$S3,J
+    \item[lw] \$S4, J
+    \item[add] \$T0,\$S1,\$S2 $\$T0=G+H$
+    \item[add] \$T1,\$S3,\$S4 $\$T1=I+J$
+    \item[sub] \$S0,\$T0,\$T1 $F=(G+H)-(I+J)$
+    \item[sw] \$S0,F
+  \end{enumerate}
+  \item LOAD WORD basically functions as a pointer to a memory location
+\end{enumerate}
+
+
+
+\subsection{Arrays}
+\begin{enumerate}
+  \item Consider $G=H+A[8]$
+  \item How do we get to the eighth element of array $A$?
+  \item We first need to know the base address (where $A$ starts)
+  \begin{enumerate}
+    \item This is the zeroth element ($A[0]$)
+    \item Place this value into a register, let's call it \$S3
+  \end{enumerate}
+  \item We then use an offset to get to the appropriate element
+  \begin{enumerate}
+    \item[lw] \$TO,32(\$S3) \# \$T0 gets $A[8]$
+  \end{enumerate}
+  \item Notice that the offset is 32 (since each array item is 4 bytes)
+  \begin{enumerate}
+    \item In MIPS, each array element (which is variable) is 32 bits in size (4 bytes)
+    \item Therefore, the eighth element is the number of bytes times the item desired ($4\times8=32$ bytes from the beginning of the array)
+  \end{enumerate}
+  \item Offsets can be positive or negatives
+  \begin{enumerate}
+    \item This allows us to go forward or backwards through an array
+  \end{enumerate}
+  \item See Figure (3)
+\end{enumerate}
+
+
+
+\subsection{MIPS Memory Data Alignment}
+\begin{enumerate}
+  \item All variables in memory are aligned to addresses divisible by 4 (32 bits)
+  \begin{enumerate}
+    \item[] $0,4,8,12,16,20,24,28,32,\dots$
+  \end{enumerate}
+  \item This is done for speed
+  \item This is known as an alignment restriction
+  \item So how is data stored in memory?
+  \begin{enumerate}
+    \item Little-endian (Intel): The least significant byte (LSB) is stored at the lowest address
+    \item Big-endian (MIPS): Most significant byte stored at the lowest address
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{Big-endian vs Little-endian}
+\begin{enumerate}
+  \item Consider this 32 bit value
+  \begin{center}
+    $12345678_{16}$\\
+    \begin{tabular}{|c|c|c|c|c|} \hline
+      Address & 0 & 1 & 2 & 3 \\ \hline
+      Big-endian & 12 & 34 & 56 & 78 \\ \hline
+      Little-endian & 78 & 56 & 34 & 12 \\ \hline
+    \end{tabular}
+  \end{center}
+  \item This means that numerical dumps of data from our programs will appear to be backwards
+\end{enumerate}
+
+
+
+\subsection{Immediate Values}
+\begin{enumerate}
+  \item Remember this instruction?
+  \begin{enumerate}
+    \item[lw] \$T0,32(\$S3) \# \$T0 gets $A[8]$
+  \end{enumerate}
+  \item The value 32 is constant in the instruction
+  \item Constant values stored in instrutions are known as immediate values
+  \item They are called such because there is no memory fetch required to obtain them; they are placed directly in the instruction itself
+\end{enumerate}
+
+
+
+\subsection{Immediate Values in MIPS}
+\begin{enumerate}
+  \item Can be signed or unsigned
+  \item Limited in size, typicall 16 bits
+  \item Read-only values
+  \item Can only be used in certain instructions
+\end{enumerate}
+
+
+
+\subsection{MIPS Instruction Types}
+\begin{enumerate}
+  \item MIPS have three basic instruction types:
+\begin{center}
+  \begin{tabular}{|c|c|c|c|} \hline
+    Type & Operand 1 & Operand 2 & Operand 3 \\ \hline \hline
+    R-type & Register & Register & Register/Immediate$^{*}$ \\ \hline
+    I-type & Register & Register \& Immediate & N/A \\ \hline
+    J-type & Immediate (address) & N/A & N/A \\ \hline
+  \end{tabular}
+  $^{*}$Immediate values permitted only within certain instructions
+\end{center}
+\item The J-type is just an OPcode followed by an address (6 and 26 bits allocated respectively)
+\end{enumerate}
+
+
+
+\subsection{Arithmetic Instructions}
+\begin{enumerate}
+  \item Add (R-type)
+  \begin{enumerate}
+    \item[add] \$reg1,\$reg2,\$reg3 \# reg1=reg2+reg3
+  \end{enumerate}
+  \item Add immediate (I-type)
+  \begin{enumerate}
+    \item[addi] \$reg1,\$reg2,imm \# reg1=reg2+imm
+  \end{enumerate}
+  \item Subtract (R-type)
+  \begin{enumerate}
+    \item[sub] \$reg1,\$reg2,\$reg3 \# reg1=reg2-reg3
+  \end{enumerate}
+  \item[] Note 1: Register order is important! Subtraction is not commutative
+  \item[] Note 2: There is no subi instruction
+\end{enumerate}
+
+
+
+\subsection{Logical Instructions}
+\begin{enumerate}
+  \item Shifting (R-type)
+  \begin{enumerate}
+    \item[sll] shift left logical
+    \item[srl] shift right logical
+  \end{enumerate}
+  \item Shifts bits left or right, filling in with zeros
+  \begin{enumerate}
+    \item[sll] \$T2,\$S0\$4 \# shift \$S0 left by 4, result in \$T2
+    \item[srl] \$T1,\$S!\$4 \# shift \$S1 right by 4, result in \$T1
+  \end{enumerate}
+  \item Uses
+  \begin{enumerate}
+    \item Isolating specific bits
+    \item Multiplying by $2^n$ (shift left)
+    \item Dividing by $2^n$ (shift right)
+    \item Bits shifted out of the register are gone
+  \end{enumerate}
+  \item Logical AND
+  \begin{enumerate}
+    \item[and] \$reg1,\$reg2,\$reg3 \# reg1=reg2 AND reg3
+    \item[andi] \$reg1,\$reg2,imm \# reg1=reg2 AND imm
+  \end{enumerate}
+  \item This instruciton performs a bitwise AND operation between reg2 and reg3
+  \begin{enumerate}
+    \item Bit 0 of reg2 AND bit 0 of reg3 = bit 0 of reg1
+    \item Bit 1 of reg2 AND bit 1 of reg3 = bit 1 of reg1 \dots
+    \item Bit 31 of reg2 AND bit 31 of reg3 = bit 31 of reg1
+  \end{enumerate}
+  \item The immediate form uses a 16 bit value (zero extended to 32 bits) with is AND'ed to reg2
+  \item Uses
+  \begin{enumerate}
+    \item Clearing bits
+    \item Isolating bit fields (extracting specific bits)
+  \end{enumerate}
+  \item Logical OR
+  \begin{enumerate}
+    \item[or] \$reg1,\$reg2,\$reg3 \# reg1=reg2 OR reg3
+    \item[ori] \$reg1,\$reg2,imm \# reg1=reg2 OR imm
+  \end{enumerate}
+  \item This instruciton performs a bitwise OR operation between reg2 and reg3
+  \begin{enumerate}
+    \item Bit 0 of reg2 OR bit 0 of reg3 = bit 0 of reg1
+    \item Bit 1 of reg2 OR bit 1 of reg3 = bit 1 of reg1 \dots
+    \item Bit 31 of reg2 OR bit 31 of reg3 = bit 31 of reg1
+  \end{enumerate}
+  \item The immediate form uses a 16 bit value (zero extended to 32 bits) with is OR'ed to reg2
+  \item Uses
+  \begin{enumerate}
+    \item Setting bits
+  \end{enumerate}
+  \item Logical negated OR (NOR)
+  \begin{enumerate}
+    \item[nor] \$reg1,\$reg2,\$reg3 \# reg1=reg2 NOR reg3
+  \end{enumerate}
+  \item This instruciton performs a bitwise NOR operation between reg2 and reg3
+  \begin{enumerate}
+    \item Bit 0 of reg2 NOR bit 0 of reg3 = bit 0 of reg1
+    \item Bit 1 of reg2 NOR bit 1 of reg3 = bit 1 of reg1 \dots
+    \item Bit 31 of reg2 NOR bit 31 of reg3 = bit 31 of reg1
+  \end{enumerate}
+  \item Uses
+  \begin{enumerate}
+    \item Can be used to perform a NOT operation
+    \begin{enumerate}
+      \item X NOR 0 (zero) = NOT X
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{Data Transfer}
+\begin{enumerate}
+  \item Load or Store word
+  \begin{enumerate}
+    \item[lw] \$reg1,imm(\$reg2)
+    \item[sw] \$reg1,imm(\$reg2)
+  \end{enumerate}
+  \item Fetches (or stores) the 32 bit memory contents pointed to by the address in reg2, offset by the immediate value
+  \begin{enumerate}
+    \item Target memory address = \$reg2+immediate
+    \item \$reg1 = contents of target memory address (LW)
+    \item Contents of target memory address = \$reg1 (SW)
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Take Away}
+\begin{enumerate}
+  \item All terms in italics
+  \item Conversion of HLL code to MIPS ASM
+  \item MIPS registers (start memorizing the green card!)
+  \item Variable memory relationship
+  \item Array element access (specifically how its done in MIPS)
+  \item Alignment restriction in MIPS
+  \item Big and little endian
+  \item Immediate values (purpose and usage)
+  \item MIPS instruction types
+  \item All MIPS instructions discussed (how to write them, whay they do)
+\end{enumerate}
+
+
+\end{document}
