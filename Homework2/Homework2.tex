@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
 % Last Edited: February 6, 2017
-% Version: 0.1c
+% Version: 0.1d
 
 \documentclass[12pt]{article}
 
@@ -117,14 +117,17 @@
 \begin{enumerate}
   \item[\textbf{Problem 5}] The instructions below are from the MIPS program in problem 2.  Determine the instruction type (R, I, or J) and field values for these instructions.  Use decimal values for each field.
 
-  \begin{tabular}{>{\ttfamily}p{6em}>{\ttfamily}p{2em}>{\ttfamily}p{3em}>{\ttfamily}p{2em}>{\ttfamily}p{2em}>{\ttfamily}p{2em}>{\ttfamily}p{4em}>{\ttfamily}p{4em}}
+  \begin{tabular}{>{\ttfamily}p{6em}>{\ttfamily}p{2em}>{\ttfamily}p{3em}>{\ttfamily}p{2em}>{\ttfamily}p{2em}>{\ttfamily}p{2em}>{\ttfamily}p{3em}>{\ttfamily}p{3em}}
     & & & & & Address/Immediate & & \\
     Instruction & Type & Opcode & RS & RT & RD & SHAMT & FUNCT \\
-    & & & & & & & \\
-    & & & & & & & \\
-    & & & & & & & \\
-    & & & & & & & \\
+    \scriptsize addi \$t5,\$zero,0 & & & & & & & \\
+    \scriptsize slt \$t2,\$a0,\$t1 & & & & & & & \\
+    \scriptsize add \$t7,\$t5,\$t6 & & & & & & & \\
+    \scriptsize bne \$t2,\$zero,finish & & & & & & & \\
+    \scriptsize j loop$^*$ & & & & & & &
   \end{tabular}
+
+  *For this instruction, you may assume that the byte address of the instruction at the label loop is 20 (decimal).
 \end{enumerate}
 
 % Proof
