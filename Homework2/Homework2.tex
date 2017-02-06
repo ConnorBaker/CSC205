@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
-% Last Edited: February 2, 2017
-% Version: 0.1a
+% Last Edited: February 6, 2017
+% Version: 0.1b
 
 \documentclass[12pt]{article}
 
@@ -34,7 +34,7 @@
 % Proof
 \begin{enumerate}
   \item[\textit{Work}] I and R are the two command types affected because they carry registers. What else happens?
-  \item[\textbf{Check}]
+  \item[\textit{Check}]
 \end{enumerate}
 
 
@@ -65,7 +65,7 @@
 % Proof
 \begin{enumerate}
   \item[\textit{Work}]
-  \item[\textbf{Check}]
+  \item[\textit{Check}]
 \end{enumerate}
 
 
@@ -74,14 +74,16 @@
 % Problem 3
 \begin{enumerate}
   \item[\textbf{Problem 3}] Using SPIM, write the MIPS instruction(s) for this C statement:
-		\centerline\texttt{A = (B - 210) * C;}
+  \begin{enumerate}
+    \item[] \texttt{A = (B - 210) * C;}}
+  \end{enumerate}
 	\item[]Turn in your source code and SPIM output showing your results.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
   \item[\textit{Work}]
-  \item[\textbf{Check}]
+  \item[\textit{Check}]
 \end{enumerate}
 
 
@@ -106,7 +108,7 @@
 % Proof
 \begin{enumerate}
   \item[\textit{Work}]
-  \item[\textbf{Check}]
+  \item[\textit{Check}]
 \end{enumerate}
 
 
@@ -119,7 +121,7 @@
 % Proof
 \begin{enumerate}
   \item[\textit{Work}]
-  \item[\textbf{Check}]
+  \item[\textit{Check}]
 \end{enumerate}
 
 
@@ -127,9 +129,9 @@
 
 
 
-% Problem 5
+% Problem 6
 \begin{enumerate}
-  \item[\textbf{Problem 5}] Using SPIM, write MIPS assembly code for the following C segment*:
+  \item[\textbf{Problem 6}] Using SPIM, write MIPS assembly code for the following C segment:
   \begin{enumerate}\ttfamily
     \item[] for (int i = 0; i < N; i++)
     \begin{enumerate}
@@ -140,13 +142,55 @@
     \end{enumerate}
     \item[] key = i;
   \end{enumerate}
+
+  \item[] You may code as many branch or jump instruc6ions in the loop as you need; however, each loop iteration can, at most, execute only one branch and one jump (total of two). Note that a branch that "falls through" (e.g. does not branch) on each pass does not count toward this requirement as an executed branch.
+
+  \item[] Value \textbf{N} is positive number that can be any number greater than or equal to 10. Be aware that large values of N will require a very large array.
+
+  \item[] You may assume that the key is always found in the array (e.g. you do not have to account for the key not being found).
+
+	\item[] Turn in your source code and SPIM output showing your results.
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
   \item[\textit{Work}]
-  \item[\textbf{Check}]
+  \item[\textit{Check}]
 \end{enumerate}
 
+
+
+
+
+
+% Problem 7
+\begin{enumerate}
+  \item[\textbf{Problem 7}] Show the single MIPS instruction or minimal sequence of instructions for this C statement:
+  \begin{enumerate}\ttfamily
+    \item[] B = 25 | A;
+  \end{enumerate}
+
+  \item[] Note: the operator | is the C "bitwise" OR operator.
+
+  \item[] Turn in your source code and SPIM output showing your results.
+
+  \begin{tabular}{>{\ttfamily}p{4em}>{\ttfamily}p{5em}>{\ttfamily}p{10em}>{\ttfamily}p{10em}}
+              & .data	  & & \\
+		myList    & .word	  & 1,2,3,4,5,6,7,8,9,10 & \#10 element array \\
+		myListA:  & .word   & myList & \# get address \\
+		of myList &       	&        & \\
+		          & .text	  &        & \\
+		lw        & \$t1,0(\$s3)	& & \# get list item \\
+		addi      & \$s3,\$s3,4 	& & \# increment list index \\
+  \end{tabular}
+
+  \item[] The LW instruction obtains an item from the list while the ADDI instruction advances the pointer register \$s3 to the next element of the array. Put these instructions in a loop and you can "walk" through an entire array!
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}]
+  \item[\textit{Check}]
+\end{enumerate}
 
 \end{document}
