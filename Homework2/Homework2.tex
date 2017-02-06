@@ -1,0 +1,152 @@
+% Author: Connor Baker
+% Date Created: February 2, 2017
+% Last Edited: February 2, 2017
+% Version: 0.1a
+
+\documentclass[12pt]{article}
+
+% Import Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{gensymb}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage[left=1.5in,right=1.5in,top=1.5in,bottom=1.5in]{geometry}
+
+\begin{document}
+% Create the Header
+\begin{center}
+  \subsection*{CSC 205: Homework 2\\Connor Baker, February 2017}
+\end{center}
+\begin{enumerate}
+  \item[\textbf{Instructions}] \textit{Answer all problems as directed.  Problems where SPIM source code is requested will NOT receive credit without the source code.  All SPIM programs should not use any instructions not covered in class and should not use any pseudo instructions.  Points will be deducted for any use of pseudo instructions.}
+\end{enumerate}
+
+% Problem 1
+\begin{enumerate}
+  \item[\textbf{Problem 1}] Suppose the MIPS processor contained half as many registers as stated in your text (16 versus 32).  What impact would this have on the instruction formats?  What instruction classes are affected?
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}] I and R are the two command types affected because they carry registers. What else happens?
+  \item[\textbf{Check}]
+\end{enumerate}
+
+
+
+
+% Problem 2
+\begin{enumerate}
+  \item[\textbf{Problem 2}] Add comments to the following MIPS code and describe in one sentence what it computes.  Assume that \$a0 is used for the input and initially contains n, a positive integer.  Assume that \$v0 is used for the output.
+
+  \begin{tabular}{>{\ttfamily}p{10em}>{\ttfamily}p{10em}>{\ttfamily}p{10em}}
+    begin: & addi	& \$t5,\$zero,0 \\
+		& addi	& \$t6,\$zero,1 \\
+		& addi	& \$t1,\$zero,1 \\ \tabularnewline
+		loop: & slt	& \$t2,\$a0,\$t1 \\
+		& bne	& \$t2,\$zero,finish \\
+		& add	& \$t7,\$t5,\$t6 \\
+		& add	& \$t5,\$zero,\$t6 \\
+		& add	& \$t6,\$zero,\$t7 \\
+		& addi & \$t1,\$t1,1 \\
+		& j	loop & \\ \tabularnewline
+		finish: & add	& \$v0,\$t7,\$zero
+  \end{tabular}
+  \item[] In addition to what you are asked for above, what value does \$v0 contain when the program finishes?
+\end{enumerate}
+
+
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}]
+  \item[\textbf{Check}]
+\end{enumerate}
+
+
+
+
+% Problem 3
+\begin{enumerate}
+  \item[\textbf{Problem 3}] Using SPIM, write the MIPS instruction(s) for this C statement:
+		\centerline\texttt{A = (B - 210) * C;}
+	\item[]Turn in your source code and SPIM output showing your results.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}]
+  \item[\textbf{Check}]
+\end{enumerate}
+
+
+
+
+% Problem 4
+\begin{enumerate}
+  \item[\textbf{Problem 4}] Using SPIM, write the MIPS instruction(s) for this C statement:
+  \begin{enumerate}\ttfamily
+    \item[] if  (q == r)
+    \begin{enumerate}
+      \item[] r = r + q;
+    \end{enumerate}
+    \item[] else
+    \begin{enumerate}
+      \item[] q = r - q;
+    \end{enumerate}
+  \end{enumerate}
+	\item[]Turn in your source code and SPIM output showing your results.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}]
+  \item[\textbf{Check}]
+\end{enumerate}
+
+
+
+% Problem 5
+\begin{enumerate}
+  \item[\textbf{Problem 5}] The instructions below are from the MIPS program in problem 2.  Determine the instruction type (R, I, or J) and field values for these instructions.  Use decimal values for each field.
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}]
+  \item[\textbf{Check}]
+\end{enumerate}
+
+
+
+
+
+
+% Problem 5
+\begin{enumerate}
+  \item[\textbf{Problem 5}] Using SPIM, write MIPS assembly code for the following C segment*:
+  \begin{enumerate}\ttfamily
+    \item[] for (int i = 0; i < N; i++)
+    \begin{enumerate}
+      \item[] if (list[i] == key)
+      \begin{enumerate}
+        \item[] Break; // Immediate for loop exit
+      \end{enumerate}
+    \end{enumerate}
+    \item[] key = i;
+  \end{enumerate}
+\end{enumerate}
+
+% Proof
+\begin{enumerate}
+  \item[\textit{Work}]
+  \item[\textbf{Check}]
+\end{enumerate}
+
+
+\end{document}
