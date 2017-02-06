@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
 % Last Edited: February 6, 2017
-% Version: 0.1d
+% Version: 0.1e
 
 \documentclass[12pt]{article}
 
@@ -33,8 +33,9 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}] I and R are the two command types affected because they carry registers. What else happens?
-  \item[\textit{Check}]
+  \item[\textit{Work}] The only instruction that does not use registers is the J type instruction. As such, both the R and I type instruction formats would see changes in terms of the registers available to them, as well as the amount of bits in the instruction allocated to the number of the register. After all, if there are only 16 available registers, there is no need for four bits in the instruction. As such, the R type instruction would have three more bits available (as one of each of the bits allocated to a register address would be freed up), and the I type instruction would have two more bits available, most likely given to the constant.
+
+  \item[] More than a few registers are reserved for the operating system, so most likely if the number of registers were to be halved there would be a massive reduction in the number of registers that store temporary information. There would also be way more register overspill -- the transfer of information stored in the registers to main memory.
 \end{enumerate}
 
 
