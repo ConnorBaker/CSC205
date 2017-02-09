@@ -1,20 +1,25 @@
 #  Filename: 			Problem2.asm
 #  Author: 				Connor Baker
-#  Version: 			0.1a
+#  Version: 			0.1b
 #  Date created:	February 7th, 2017
-#  Last modified: February 7th, 2017
+#  Last modified: February 9th, 2017
 #
 #  Description: 	Adding comments to the following program
 
-################################### DATA ###################################
+
+
+#################################### DATA ####################################
+# THIS IS THE DATA SECTION OF THE ASM PROGRAM
 .data
 varA:			.word	0
 
-################################### TEXT ###################################
+
+
+#################################### TEXT ####################################
+# THIS IS THE TEXT SECTION OF THE PROGRAM
 .text
 .globl 	main										# must be global
 main:
-
 
 begin:
 addi	$t5,$zero,0 # Store 0 in $t5
@@ -39,7 +44,6 @@ j	loop # Loops back through again.
 # fall through because one is not equal to zero. As such, the loop will
 # terminate.
 
-
 finish:
 add	$v0,$t7,$zero # $t7 was only touched once, so it's still one. One plus zero
 # is one, which is stored in $v0.
@@ -47,6 +51,10 @@ add	$v0,$t7,$zero # $t7 was only touched once, so it's still one. One plus zero
 # Find out what $v0 contains
 sw $v0,varA
 
+
+
+################################## PRINTING ##################################
+# THIS IS THE SECTION OF THE PROGRAM THAT PRINTS OUTPUT TO ENSURE CORRECTNESS
 add	$v0,$zero,1									# Print integer function code
 # The number one is the code to trigger printing for an integer for a syscall
 lw	$a0,varA										# Pass the product as an argument to print
