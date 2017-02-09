@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
-% Last Edited: February 8, 2017
-% Version: 0.2d
+% Last Edited: February 9, 2017
+% Version: 0.2e
 
 \documentclass[12pt]{article}
 
@@ -43,7 +43,7 @@
 
 % Problem 2
 \begin{enumerate}
-  \item[\textbf{Problem 2}] Add comments to the following MIPS code and describe in one sentence what it computes.  Assume that \$a0 is used for the input and initially contains n, a positive integer.  Assume that \$v0 is used for the output.
+  \item[\textbf{Problem 2}] Add comments to the following MIPS code and describe in one sentence what it computes.  Assume that \$a0 is used for the input and initially contains $n$, a positive integer.  Assume that \$v0 is used for the output.
 
   \begin{tabular}{>{\ttfamily}p{10em}>{\ttfamily}p{10em}>{\ttfamily}p{10em}}
     begin: & addi	& \$t5,\$zero,0 \\
@@ -65,7 +65,9 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
+  \item[\textit{Work}] The program computes the ($n-1$)th element (where \$a0 is $n$) of the Fibonacci sequence (generating function $F_n=F_{n-1}+F_{n-2}$), where $F_0=1,F_1=2$ (so it generates the zero-indexed set $\{1,2,3,5,8,\dots\}$, instead of the more widely used set for the Fibonacci sequence, $\{0,1,1,2,3,\dots\}$, which requres that $F_0=0$ and $F_1=1$). That ($n-1$)th element is what \$v0 contains.
+
+  \item[] The commented code is in Problem2.asm, which is attached.
 \end{enumerate}
 
 
@@ -82,8 +84,7 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
-  \item[\textit{Check}]
+  \item[\textit{Work}] See attached file, Problem3.asm.
 \end{enumerate}
 
 
@@ -107,8 +108,7 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
-  \item[\textit{Check}]
+  \item[\textit{Work}] See attached file, Problem4.asm.
 \end{enumerate}
 
 
@@ -133,7 +133,6 @@
 % Proof
 \begin{enumerate}
   \item[\textit{Work}]
-  \item[\textit{Check}]
 \end{enumerate}
 
 
