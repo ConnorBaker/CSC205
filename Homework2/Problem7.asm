@@ -1,6 +1,6 @@
 #  Filename: 			Problem7.asm
 #  Author: 				Connor Baker
-#  Version: 			0.1a
+#  Version: 			0.1b
 #  Date created:	February 9th, 2017
 #  Last modified: February 9th, 2017
 #
@@ -29,6 +29,10 @@ main:
 addi $t0,$zero,25 # Load 25 into $t1
 lw $t1,varA # Load varA into $t0
 or $s0,$t0,$t1 # Perform the or on 25 and A
+# I saved it in register $s0 because it elimantes the need for a dummy
+# variable and gets rid of the need to use a store word load word, further
+# compacting the code. In the print section below, I just use an add instruction
+# to copy the value of $s0 to $a0 for printing.
 
 
 
