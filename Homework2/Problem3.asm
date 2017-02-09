@@ -1,8 +1,8 @@
 #  Filename: 			Problem3.asm
 #  Author: 				Connor Baker
-#  Version: 			0.1c
+#  Version: 			0.1d
 #  Date created:	February 5th, 2017
-#  Last modified: February 7th, 2017
+#  Last modified: February 9th, 2017
 #
 #  Description: 	MIPS translation of the mathematical statement
 #									A = (B - 210) * C.
@@ -10,7 +10,10 @@
 #									Here, A (varA) is dependent on B (varB) and C (varC).
 #									varB = 356, varC = 2.
 
-################################### DATA ###################################
+
+
+#################################### DATA ####################################
+# THIS IS THE DATA SECTION OF THE ASM PROGRAM
 .data
 varA: .word 0
 varB:	.word	356
@@ -20,7 +23,10 @@ msg: .asciiz "(356 - 210) * 2 = "
 msgadr: .word	msg # Store the address of string msg
 # Avoid the use of the "la" pseudo-instruction
 
-################################### TEXT ###################################
+
+
+#################################### TEXT ####################################
+# THIS IS THE TEXT SECTION OF THE PROGRAM
 .text
 .globl main # must be global
 main:
@@ -34,7 +40,10 @@ mult $t1,$t0 # Multiply the difference of varB and varD by
 mflo $s0 # Store the product in $s0
 sw $s0,varA # Set varA equal to the product
 
-# Code for printing out the result of the computation
+
+
+################################## PRINTING ##################################
+# THIS IS THE SECTION OF THE PROGRAM THAT PRINTS OUTPUT TO ENSURE CORRECTNESS
 add	$v0,$zero,4 # Print the string function code
 # The number four is the code to trigger printing for a string for a syscall
 lw $a0,msgadr # Get the address of the string "msg" to print
