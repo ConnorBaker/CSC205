@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
 % Last Edited: February 9, 2017
-% Version: 0.3c
+% Version: 0.3d
 
 \documentclass[12pt]{article}
 
@@ -35,7 +35,7 @@
 \begin{enumerate}
   \item[\textit{Work}] The only instruction that does not use registers is the J type instruction. As such, both the R and I type instruction formats would see changes in terms of the registers available to them, as well as the amount of bits in the instruction allocated to the number of the register. After all, if there are only 16 available registers, there is no need for four bits in the instruction. As such, the R type instruction would have three more bits available (as one of each of the bits allocated to a register address would be freed up), and the I type instruction would have two more bits available, most likely given to the constant.
 
-  \item[] More than a few registers are reserved for the operating system, so most likely if the number of registers were to be halved there would be a massive reduction in the number of registers that store temporary information. There would also be way more register overspill -- the transfer of information stored in the registers to main memory.
+  \item[] More than a few registers are reserved for the operating system, so most likely if the number of registers were to be halved there would be a massive reduction in the number of registers that store temporary information. There would also be way more register over-spill -- the transfer of information stored in the registers to main memory.
 \end{enumerate}
 
 
@@ -65,7 +65,7 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}] The program computes the ($n-1$)th element (where \$a0 is $n$) of the Fibonacci sequence (generating function $F_n=F_{n-1}+F_{n-2}$), where $F_0=1,F_1=2$ (so it generates the zero-indexed set $\{1,2,3,5,8,\dots\}$, instead of the more widely used set for the Fibonacci sequence, $\{0,1,1,2,3,\dots\}$, which requres that $F_0=0$ and $F_1=1$). That ($n-1$)th element is what \$v0 contains.
+  \item[\textit{Work}] The program computes the ($n-1$)th element (where \$a0 is $n$) of the Fibonacci sequence (generating function $F_n=F_{n-1}+F_{n-2}$), where $F_0=1,F_1=2$ (so it generates the zero-indexed set $\{1,2,3,5,8,\dots\}$, instead of the more widely used set for the Fibonacci sequence, $\{0,1,1,2,3,\dots\}$, which requires that $F_0=0$ and $F_1=1$). That ($n-1$)th element is what \$v0 contains.
 
   \item[] The commented code is in Problem2.asm, which is attached.
 \end{enumerate}
@@ -158,7 +158,7 @@
     \item[] key = i;
   \end{enumerate}
 
-  \item[] You may code as many branch or jump instruc6ions in the loop as you need; however, each loop iteration can, at most, execute only one branch and one jump (total of two). Note that a branch that "falls through" (e.g. does not branch) on each pass does not count toward this requirement as an executed branch.
+  \item[] You may code as many branch or jump instructions in the loop as you need; however, each loop iteration can, at most, execute only one branch and one jump (total of two). Note that a branch that "falls through" (e.g. does not branch) on each pass does not count toward this requirement as an executed branch.
 
   \item[] Value \textbf{N} is positive number that can be any number greater than or equal to 10. Be aware that large values of N will require a very large array.
 
@@ -170,9 +170,9 @@
 
   \begin{tabular}{>{\ttfamily}p{4em}>{\ttfamily}p{5em}>{\ttfamily}p{10em}>{\ttfamily}p{10em}}
               & .data	  & & \\
-    myList    & .word	  & 1,2,3,4,5,6,7,8,9,10 & \#10 element array \\
-    myListA:  & .word   & myList & \# get address \\
-    of myList &       	&        & \\
+    myList:   & .word	  & 1,2,3,4,5,6,7,8,9,10 & \#10 element array \\
+    myListA:  & .word   & myList & \# get address of myList\\
+              &       	&        & \\
               & .text	  &        & \\
     lw		    & \$s3,myListA &	& \# set \$s3 to the beginning address of the array \\
     lw        & \$t1,0(\$s3)	& & \# get list item \\
@@ -184,8 +184,8 @@
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}] See Problem6.asm, attached.
-  \item[\textit{SPIM Output}]
+  \item[\textit{Work}] See Problem6.asm, attached. The key to search for (the array is the set of natural numbers) was 7. The number of iterations is zero-indexed (just like the condition of the for loop), so it was found on the 6th iteration. If we wanted to print out what the actual key was, changing our starting index to one, we could simply add one before printing the output.
+  \item[\textit{SPIM Output}] The key is: 6
 \end{enumerate}
 
 
