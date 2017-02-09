@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
 % Last Edited: February 9, 2017
-% Version: 0.3a
+% Version: 0.3b
 
 \documentclass[12pt]{article}
 
@@ -125,9 +125,9 @@
     \scriptsize j loop$^*$ & J & 2 & & & & 20 & \\
     Instruction & Type & Opcode & RS & RT & Address/Immediate & & \\
     \scriptsize addi \$t5,\$zero,0 & I & 8 & 0 & 13 & & 0 & \\
-    \scriptsize bne \$t2,\$zero,finish & I & 5 & 0 & 10 & & ? & \\
+    \scriptsize bne \$t2,\$zero,finish & I & 5 & 0 & 10 & & 5 & \\
     Instruction & Type & Opcode & RS & RT & RD & SHAMT & FUNCT \\
-    \scriptsize slt \$t2,\$a0,\$t1 & R & 0 & ? & 9 & 10 & 0 & 42 \\
+    \scriptsize slt \$t2,\$a0,\$t1 & R & 0 & 4 & 9 & 10 & 0 & 42 \\
     \scriptsize add \$t7,\$t5,\$t6 & R & 0 & 13 & 14 & 15 & 0 & 32
   \end{tabular}
 
