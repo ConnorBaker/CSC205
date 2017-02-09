@@ -1,7 +1,7 @@
 % Author: Connor Baker
 % Date Created: February 2, 2017
 % Last Edited: February 9, 2017
-% Version: 0.2f
+% Version: 0.3a
 
 \documentclass[12pt]{article}
 
@@ -165,6 +165,21 @@
   \item[] You may assume that the key is always found in the array (e.g. you do not have to account for the key not being found).
 
 	\item[] Turn in your source code and SPIM output showing your results.
+
+  \item[] Below is an example of how to access an array in MIPS.
+
+  \begin{tabular}{>{\ttfamily}p{4em}>{\ttfamily}p{5em}>{\ttfamily}p{10em}>{\ttfamily}p{10em}}
+              & .data	  & & \\
+    myList    & .word	  & 1,2,3,4,5,6,7,8,9,10 & \#10 element array \\
+    myListA:  & .word   & myList & \# get address \\
+    of myList &       	&        & \\
+              & .text	  &        & \\
+    lw		    & \$s3,myListA &	& \# set \$s3 to the beginning address of the array \\
+    lw        & \$t1,0(\$s3)	& & \# get list item \\
+    addi      & \$s3,\$s3,4 	& & \# increment list index \\
+  \end{tabular}
+
+  \item[] The LW instruction obtains an item from the list while the ADDI instruction advances the pointer register \$s3 to the next element of the array. Put these instructions in a loop and you can "walk" through an entire array!
 \end{enumerate}
 
 % Proof
@@ -188,26 +203,12 @@
   \item[] Note: the operator | is the C "bitwise" OR operator.
 
   \item[] Turn in your source code and SPIM output showing your results.
-
-  \item[] Below is an example of how to access an array in MIPS.
-
-  \begin{tabular}{>{\ttfamily}p{4em}>{\ttfamily}p{5em}>{\ttfamily}p{10em}>{\ttfamily}p{10em}}
-              & .data	  & & \\
-		myList    & .word	  & 1,2,3,4,5,6,7,8,9,10 & \#10 element array \\
-		myListA:  & .word   & myList & \# get address \\
-		of myList &       	&        & \\
-		          & .text	  &        & \\
-		lw        & \$t1,0(\$s3)	& & \# get list item \\
-		addi      & \$s3,\$s3,4 	& & \# increment list index \\
-  \end{tabular}
-
-  \item[] The LW instruction obtains an item from the list while the ADDI instruction advances the pointer register \$s3 to the next element of the array. Put these instructions in a loop and you can "walk" through an entire array!
 \end{enumerate}
 
 % Proof
 \begin{enumerate}
-  \item[\textit{Work}]
-  \item[\textit{SPIM Output}]
+  \item[\textit{Work}] See attached Problem7.asm.
+  \item[\textit{SPIM Output}] The result of B = 25 | A is: 29
 \end{enumerate}
 
 \end{document}
